@@ -6,7 +6,17 @@
     font-size: 36px;
 }
 
+.NavLink{
+    padding: 0 10px;
+    color: #ffff;
+}
+
+.Active i {
+    color: blue;
+}
+
 .Title{
     letter-spacing: 6.5%;
     font-size: 40px;
+    color: #ffff!important;
 }
