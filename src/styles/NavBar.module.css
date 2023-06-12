@@ -3,8 +3,10 @@
 .NavBar{
     background-color: #6FC0E1;
     font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 36px;
 }
 
 .Title{
     letter-spacing: 6.5%;
+    font-size: 40px;
 }

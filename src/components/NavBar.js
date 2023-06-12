@@ -15,8 +15,8 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className={styles.collapse} id="basic-navbar-nav">
                         <Nav className="ml-auto text-left">
-                            <Nav.Link href="#home">Register</Nav.Link>
-                            <Nav.Link href="#link">Login</Nav.Link>
+                            <Nav.Link href="#login"><i class="fa-solid fa-right-to-bracket"></i></Nav.Link>
+                            <Nav.Link href="#register"><i class="fa-solid fa-user-plus"></i></Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
             </Container>
