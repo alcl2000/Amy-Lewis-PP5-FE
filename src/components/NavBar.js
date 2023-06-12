@@ -11,14 +11,14 @@ const NavBar = () => {
                 <Navbar.Brand href='#home'>
                     <img src={logo} alt="" height={'45px'}/>
                 </Navbar.Brand>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="mr-auto">
-                                <Nav.Link href="#home">Register</Nav.Link>
-                                <Nav.Link href="#link">Login</Nav.Link>
-                            </Nav>
-                        </Navbar.Collapse>
+                <Navbar.Brand className={styles.Title} href="#home">Crack-It</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse className={styles.collapse} id="basic-navbar-nav">
+                        <Nav className="ml-auto text-left">
+                            <Nav.Link href="#home">Register</Nav.Link>
+                            <Nav.Link href="#link">Login</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
             </Container>
         </Navbar>
     </div>
