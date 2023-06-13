@@ -1,0 +1,15 @@
+.Title{
+    padding-top: 10px;
+}
+.Form{
+    max-width: 75%;
+    padding: 20px 10px;
+    border:  2px solid #a0d8e6;
+}
+.Subtext{
+    max-width: 75%;
+    margin: 20px auto;
+}
+.Subtext>p{
+    margin-bottom: 0;
+}
