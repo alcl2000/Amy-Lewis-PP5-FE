@@ -83,6 +83,11 @@ const SignUpForm = () => {
                     <Button variant="info" type="submit" block>
                         Create Account
                     </Button>
+                    {errors.non_field_errors?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
                 </Form>
             </Container>
             <Container className={styles.Subtext}>
