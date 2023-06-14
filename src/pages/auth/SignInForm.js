@@ -26,8 +26,8 @@ const SignInForm = () =>{
         try{
             await axios.post('/dj-rest-auth/login/', loginData);
             history.push('/');
-        } catch (err){
-            setErrors(err.resonse?.data);
+        } catch (err) {
+            setErrors(err.response?.data);
         }
     }
     /*JSX Return Statement */
@@ -69,6 +69,11 @@ const SignInForm = () =>{
                     <Button variant="info" type="submit" block>
                         Log In
                     </Button>
+                    {errors.non_field_errors?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
                 </Form>
             </Container>
             <Container className={styles.Subtext}>
