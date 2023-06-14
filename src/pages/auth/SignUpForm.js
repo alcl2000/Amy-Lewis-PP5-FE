@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import {Form, Container, Button, Alert } from 'react-bootstrap'
-import styles from '../../styles/SignUpForm.module.css'
+import {Form, Container, Button, Alert } from 'react-bootstrap';
+import styles from '../../styles/SignUpForm.module.css';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from "axios";
 
 const SignUpForm = () => {
     /* create account data */
     const [signUpData, setSignUpData] = useState({
-        username: '',
-        password1: '',
-        password2: ''
-    });
+        username: "",
+        password1: "",
+        password2: ""  
+      });
     const {username, password1, password2} = signUpData;
     /*error handling */
     const [errors, setErrors] = useState({});
@@ -18,17 +18,17 @@ const SignUpForm = () => {
     const history = useHistory()   
     const handleChange = (event) => {
         setSignUpData({
-            ...signUpData,
-            [event.target.name]: event.target.value, 
+          ...signUpData,
+          [event.target.name]: event.target.value,
         });
-    };
+      };
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/dj-rest-auth/registration/", signUpData);
-      history.push("/signin");
+        await axios.post("/dj-rest-auth/registration/", signUpData);
+        history.push("/signin");
     } catch (err) {
-      setErrors(err.response?.data);
+        setErrors(err.response?.data);
     }
   };
     /* JSX return */
@@ -61,6 +61,11 @@ const SignUpForm = () => {
                             onChange={handleChange}
                         />
                     </Form.Group>
+                    {errors.password1?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
                     <Form.Group controlId="password2">
                         <Form.Label srOnly>Confirm Password</Form.Label>
                         <Form.Control 
@@ -70,6 +75,11 @@ const SignUpForm = () => {
                             onChange={handleChange}
                         />
                     </Form.Group>
+                    {errors.password2?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
                     <Button variant="info" type="submit" block>
                         Create Account
                     </Button>
