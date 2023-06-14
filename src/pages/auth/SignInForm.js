@@ -1,41 +1,40 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {Form, Container, Button, Alert } from 'react-bootstrap';
 import styles from '../../styles/SignUpForm.module.css';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import axios from "axios";
+import axios from 'axios'
 
-const SignUpForm = () => {
-    /* create account data */
-    const [signUpData, setSignUpData] = useState({
+const SignInForm = () =>{
+    /*Login data*/
+    const [loginData, setLoginData] = useState({
         username: "",
-        password1: "",
-        password2: ""  
-      });
-    const {username, password1, password2} = signUpData;
-    /*error handling */
+        password: ""
+    });
+    const{username, password} = loginData;
+    /*Error handling */
     const [errors, setErrors] = useState({});
-    /*event handling */
-    const history = useHistory()   
+    /*Event handling */
     const handleChange = (event) => {
-        setSignUpData({
-          ...signUpData,
-          [event.target.name]: event.target.value,
-        });
-      };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-        await axios.post("/dj-rest-auth/registration/", signUpData);
-        history.push("/signin");
-    } catch (err) {
-        setErrors(err.response?.data);
+        setLoginData({
+            ...loginData,
+            [event.target.name]: event.target.value,
+        })
+    };
+    const history = useHistory();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try{
+            await axios.post('/dj-rest-auth/login/', loginData);
+            history.push('/');
+        } catch (err) {
+            setErrors(err.response?.data);
+        }
     }
-  };
-    /* JSX return */
-    return (
+    /*JSX Return Statement */
+    return(
         <div>
             <Container className={styles.Form}>
-                <h3 className={styles.Title}>Create an account</h3>
+                <h3 className={styles.Title}>Log In</h3>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="username">
                         <Form.Label >Username</Form.Label>
@@ -52,36 +51,23 @@ const SignUpForm = () => {
                             {message}
                         </Alert>
                     ))}
-                    <Form.Group controlId="password1">
+                    <Form.Group controlId="password">
                         <Form.Label>Password</Form.Label>
                         <Form.Control 
                             type="password" 
                             placeholder="Password"
-                            value={password1}
+                            name='password'
+                            value={password}
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    {errors.password1?.map((message, idx) => (
-                        <Alert variant="warning" key={idx}>
-                            {message}
-                        </Alert>
-                    ))}
-                    <Form.Group controlId="password2">
-                        <Form.Label srOnly>Confirm Password</Form.Label>
-                        <Form.Control 
-                            type="password" 
-                            placeholder="Confirm Password"
-                            value={password2}
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    {errors.password2?.map((message, idx) => (
+                    {errors.password?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>
                             {message}
                         </Alert>
                     ))}
                     <Button variant="info" type="submit" block>
-                        Create Account
+                        Log In
                     </Button>
                     {errors.non_field_errors?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>
@@ -91,11 +77,12 @@ const SignUpForm = () => {
                 </Form>
             </Container>
             <Container className={styles.Subtext}>
-                    <p className='muted' pt='5px'>Already have an account?</p>
-                    <Link >Log In</Link>
+                    <p className='muted' pt='5px'>Don't have an account?</p>
+                    <Link to='/register'>Create an account</Link>
             </Container>
         </div>
-    )
-}
+    );
 
-export default SignUpForm
+};
+
+export default SignInForm;
