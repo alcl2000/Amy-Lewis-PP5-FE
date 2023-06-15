@@ -3,8 +3,11 @@ import {Form, Container, Button, Alert } from 'react-bootstrap';
 import styles from '../../styles/SignUpForm.module.css';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios'
+import { useSetCurrentUser } from '../../contexts/CurrentUserContexts';
 
 const SignInForm = () =>{
+    /*User context */
+    const setCurrentUser = useSetCurrentUser()
     /*Login data*/
     const [loginData, setLoginData] = useState({
         username: "",
@@ -24,7 +27,8 @@ const SignInForm = () =>{
     const handleSubmit = async (event) => {
         event.preventDefault();
         try{
-            await axios.post('/dj-rest-auth/login/', loginData);
+            const {data} = await axios.post('/dj-rest-auth/login/', loginData);
+            setCurrentUser(data.user)
             history.push('/');
         } catch (err) {
             setErrors(err.response?.data);
