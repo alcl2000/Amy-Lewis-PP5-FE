@@ -6,11 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import {
     BrowserRouter as Router,
   } from "react-router-dom";
+import { CurrentUserProvider } from './contexts/CurrentUserContexts';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-        <App />
+        <CurrentUserProvider>
+            <App />
+        </CurrentUserProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
