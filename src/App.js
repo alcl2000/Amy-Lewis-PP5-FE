@@ -8,15 +8,19 @@ import SignUpForm from './pages/auth/SignUpForm'
 import SignInForm from './pages/auth/SignInForm'
 
 function App() {
-  return (
-    <div className="App">
-      <NavBar />
-      <Container>
-        <Route exact path='/register' render={() => <SignUpForm />}/>
-        <Route exact path='/signin' render={() => <SignInForm />}/>
-      </Container>
-    </div>
-  );
+    /*JSX Return Statement */
+    return (
+        <div className="App">
+            <NavBar />
+            <Container>
+                <Switch>
+                    <Route exact path='/register' render={() => <SignUpForm />}/>
+                    <Route exact path='/signin' render={() => <SignInForm />}/>
+                    <Route render={() => <p>404 PAGE NOT FOUND</p>} />
+                </Switch>
+            </Container>
+        </div>
+    );
 }
 
 export default App;
