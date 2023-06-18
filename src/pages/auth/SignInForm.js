@@ -2,38 +2,44 @@ import React, { useState } from 'react';
 import {Form, Container, Button, Alert } from 'react-bootstrap';
 import styles from '../../styles/SignUpForm.module.css';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import axios from 'axios'
+import axios from 'axios';
 import { useSetCurrentUser } from '../../contexts/CurrentUserContexts';
+import { useRedirect } from '../../hooks/useRedirect';
 
-const SignInForm = () =>{
+function SignInForm(){
     /*User context */
-    const setCurrentUser = useSetCurrentUser()
+    const setCurrentUser = useSetCurrentUser();
+    useRedirect('loggedIn');
     /*Login data*/
     const [loginData, setLoginData] = useState({
         username: "",
-        password: ""
+        password: "",
     });
-    const{username, password} = loginData;
-    /*Error handling */
+    const {username, password} = loginData;
     const [errors, setErrors] = useState({});
-    /*Event handling */
-    const handleChange = (event) => {
-        setLoginData({
-            ...loginData,
-            [event.target.name]: event.target.value,
-        })
-    };
+    
+    
+    /*Error handling */
     const history = useHistory();
     const handleSubmit = async (event) => {
         event.preventDefault();
         try{
             const {data} = await axios.post('/dj-rest-auth/login/', loginData);
-            setCurrentUser(data.user)
+            setCurrentUser(data.user);
+
+            // setTokenTimestamp(data);
             history.push('/');
         } catch (err) {
             setErrors(err.response?.data);
-        }
-    }
+        };
+    };
+    /*Event handling */
+    const handleChange = (event) => {
+        setLoginData({
+            ...loginData,
+            [event.target.name]: event.target.value,
+        });
+    };
     /*JSX Return Statement */
     return(
         <div>
