@@ -5,27 +5,27 @@ import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import { useCurrentUser } from '../contexts/CurrentUserContexts';
 
-const NavBar = () => {
+const NavBar = () => { 
     //User context
     const currentUser = useCurrentUser()
     // User context-based nav elements
     const loggedInUserIcons = <>
-                                <NavLink to='/'>
-                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                <NavLink to='/' className={styles.NavLink} activeClassName={styles.Active}>
+                                    <i className="fa-solid fa-right-from-bracket"></i>
                                 </NavLink>
-                                <NavLink to='/'>
-                                    <i class="fa-solid fa-list-check"></i>
+                                <NavLink to='/'className={styles.NavLink} activeClassName={styles.Active}>
+                                    <i className="fa-solid fa-list-check"></i>
                                 </NavLink>
-                                <NavLink to='/'>
+                                <NavLink to='/' className={styles.NavLink} activeClassName={styles.Active}>
                                     {currentUser?.username}
                                 </NavLink>
                               </>
     const loggedOutUserIcons = <>
                                 <NavLink to="/signin" className={styles.NavLink} activeClassName={styles.Active}>
-                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                    <i className="fa-solid fa-right-to-bracket"></i>
                                 </NavLink>
                                 <NavLink to="/register" className={styles.NavLink} activeClassName={styles.Active}>
-                                    <i class="fa-solid fa-user-plus"></i>
+                                    <i className="fa-solid fa-user-plus"></i>
                                 </NavLink>
                             
                          </>
