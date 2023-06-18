@@ -13,11 +13,11 @@ const NavBar = () => {
                                 <NavLink to='/'>
                                     <i class="fa-solid fa-right-from-bracket"></i>
                                 </NavLink>
-                                <NavLink>
+                                <NavLink to='/'>
                                     <i class="fa-solid fa-list-check"></i>
                                 </NavLink>
-                                <NavLink>
-                                    {currentUser?.name}
+                                <NavLink to='/'>
+                                    {currentUser?.username}
                                 </NavLink>
                               </>
     const loggedOutUserIcons = <>
