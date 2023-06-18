@@ -4,19 +4,21 @@ import './App.css';
 import { Switch, Route} from "react-router-dom";
 import  {Container} from "react-bootstrap"
 import './api/axiosDefaults'
+import { useCurrentUser } from "./contexts/CurrentUserContexts";
 import SignUpForm from './pages/auth/SignUpForm'
 import SignInForm from './pages/auth/SignInForm'
 import HomePage from './pages/home/HomePage';
 
 function App() {
     /*JSX Return Statement */
+    const currentUser = useCurrentUser();
     return (
         <div className="App">
             <NavBar />
             <Container>
                 <Switch>
-                    <Route exact path='/register' render={() => <SignUpForm />}/>
-                    <Route exact path='/signin' render={() => <SignInForm />}/>
+                    <Route exact path='/register' render={() => <SignUpForm />} />
+                    <Route exact path='/signin' render={() => <SignInForm />} />
                     <Route render={() => <HomePage />} />
                 </Switch>
             </Container>
