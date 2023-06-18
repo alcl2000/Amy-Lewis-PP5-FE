@@ -28,7 +28,7 @@ function SignInForm(){
             setCurrentUser(data.user);
 
             // setTokenTimestamp(data);
-            history.goBack();
+            history.push('/');
         } catch (err) {
             setErrors(err.response?.data);
         };
