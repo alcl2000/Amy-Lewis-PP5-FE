@@ -9,7 +9,7 @@ const SignUpForm = () => {
     const [signUpData, setSignUpData] = useState({
         username: "",
         password1: "",
-        password2: ""  
+        password2: "",
       });
     const {username, password1, password2} = signUpData;
     /*error handling */
@@ -21,16 +21,19 @@ const SignUpForm = () => {
           ...signUpData,
           [event.target.name]: event.target.value,
         });
+        console.log(signUpData)
       };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-        await axios.post("/dj-rest-auth/registration/", signUpData);
-        history.push("/signin");
-    } catch (err) {
-        setErrors(err.response?.data);
-    }
-  };
+    const handleSubmit = async (event) => {
+        console.log(signUpData)
+        event.preventDefault();
+        try {
+            await axios.post("/dj-rest-auth/registration/", signUpData);
+            history.push("/signin");
+        } catch (err) {
+            setErrors(err.response?.data);
+            
+        }
+    };
     /* JSX return */
     return (
         <div>
@@ -92,7 +95,7 @@ const SignUpForm = () => {
             </Container>
             <Container className={styles.Subtext}>
                     <p className='muted' pt='5px'>Already have an account?</p>
-                    <Link >Log In</Link>
+                    <Link to='/signin'>Log In</Link>
             </Container>
         </div>
     )
