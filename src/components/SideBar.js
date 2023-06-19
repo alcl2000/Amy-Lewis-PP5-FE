@@ -1,7 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import styles from '../styles/SideBar.css'
 
 export const SideBar = () => {
   return (
-    <div>SideBar</div>
+    <div className={styles.Container}>
+        <p>No Tasks!</p>
+        <Link to='/'>Add some here!</Link>
+    </div>
   )
 }
