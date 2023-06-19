@@ -3,17 +3,27 @@ import { Navbar, Nav, Container} from 'react-bootstrap';
 import logo from '../assets/logo.png'
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
-import { useCurrentUser } from '../contexts/CurrentUserContexts';
+import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContexts';
 import Avatar from './Avatar';
+import axios from 'axios';
 
 const NavBar = () => { 
     //User context
     const currentUser = useCurrentUser()
+    const setCurrentUser = useSetCurrentUser()
     const projectIcon = (
                         <NavLink to='/'className={styles.ProjectLink} activeClassName={styles.Active}>
                             <i className="fa-solid fa-list-check"></i>
                         </NavLink>
                         )
+    const handleSignOut = async () => {
+        try{
+            await axios.post('/dj-rest-auth/logout/');
+            setCurrentUser(null);
+        } catch (err) {
+            console.log(err);
+        }
+    }
     // User context-based nav elements
     const loggedInUserIcons = <>
                                 <NavLink to={`/profiles/${currentUser?.profile_id}/`} className={styles.NavLink} activeClassName={styles.Active}>
@@ -22,7 +32,7 @@ const NavBar = () => {
                                 <NavLink 
                                     to='/' 
                                     className={styles.NavLink}
-                                    onClick={() => {}} 
+                                    onClick={handleSignOut} 
                                 >
                                     <i className="fa-solid fa-right-from-bracket"></i>
                                 </NavLink>
