@@ -4,6 +4,7 @@ import logo from '../assets/logo.png'
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import { useCurrentUser } from '../contexts/CurrentUserContexts';
+import Avatar from './Avatar';
 
 const NavBar = () => { 
     //User context
@@ -16,7 +17,7 @@ const NavBar = () => {
     // User context-based nav elements
     const loggedInUserIcons = <>
                                 <NavLink to={`/profiles/${currentUser?.profile_id}/`} className={styles.NavLink} activeClassName={styles.Active}>
-                                    <img src={currentUser?.profile_pic}/>
+                                    <Avatar src={currentUser?.profile_pic} height={50}/>
                                 </NavLink>
                                 <NavLink 
                                     to='/' 
