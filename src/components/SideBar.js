@@ -6,7 +6,7 @@ export const SideBar = () => {
   return (
     <div className={styles.Container}>
         <p>No Tasks!</p>
-        <Link to='/'>Add some here!</Link>
+        <Link className='btn btn-large btn-info' to='/'>Add some here!</Link>
     </div>
   )
 }
