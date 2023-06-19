@@ -8,16 +8,22 @@ import { useCurrentUser } from '../contexts/CurrentUserContexts';
 const NavBar = () => { 
     //User context
     const currentUser = useCurrentUser()
+    const projectIcon = (
+                        <NavLink to='/'className={styles.ProjectLink} activeClassName={styles.Active}>
+                            <i className="fa-solid fa-list-check"></i>
+                        </NavLink>
+                        )
     // User context-based nav elements
     const loggedInUserIcons = <>
-                                <NavLink to='/' className={styles.NavLink} activeClassName={styles.Active}>
+                                <NavLink to={`/profiles/${currentUser?.profile_id}/`} className={styles.NavLink} activeClassName={styles.Active}>
+                                    <img src={currentUser?.profile_pic}/>
+                                </NavLink>
+                                <NavLink 
+                                    to='/' 
+                                    className={styles.NavLink}
+                                    onClick={() => {}} 
+                                >
                                     <i className="fa-solid fa-right-from-bracket"></i>
-                                </NavLink>
-                                <NavLink to='/'className={styles.NavLink} activeClassName={styles.Active}>
-                                    <i className="fa-solid fa-list-check"></i>
-                                </NavLink>
-                                <NavLink to='/' className={styles.NavLink} activeClassName={styles.Active}>
-                                    {currentUser?.username}
                                 </NavLink>
                               </>
     const loggedOutUserIcons = <>
@@ -40,6 +46,7 @@ const NavBar = () => {
                     </Navbar.Brand>
                     <Navbar.Brand className={styles.Title}>Crack-It</Navbar.Brand>
                 </NavLink>
+                {currentUser && projectIcon}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className={styles.collapse} id="basic-navbar-nav">
                         <Nav className="ml-auto text-left">
