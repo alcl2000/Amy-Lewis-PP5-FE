@@ -1,4 +1,5 @@
 import hero from '../../assets/hero.png';
+import { SideBar } from '../../components/SideBar';
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import styles from '../../styles/HomePage.css';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
@@ -9,7 +10,7 @@ const HomePage = () => {
     
     const loggedInContent = (
         <>
-        
+        <SideBar />
         </>
     );
     const loggedOutContent = (
