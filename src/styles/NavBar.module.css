@@ -10,6 +10,11 @@
     padding: 0 10px;
     color: #ffff;
 }
+.ProjectLink{
+    text-align: center;
+    padding: 0 10px;
+    color: #ffff;
+}
 
 .Active i {
     color: #2d90a9;

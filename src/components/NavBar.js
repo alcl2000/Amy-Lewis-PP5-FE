@@ -3,29 +3,46 @@ import { Navbar, Nav, Container} from 'react-bootstrap';
 import logo from '../assets/logo.png'
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
-import { useCurrentUser } from '../contexts/CurrentUserContexts';
+import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContexts';
+import Avatar from './Avatar';
+import axios from 'axios';
 
-const NavBar = () => {
+const NavBar = () => { 
     //User context
     const currentUser = useCurrentUser()
+    const setCurrentUser = useSetCurrentUser()
+    const projectIcon = (
+                        <NavLink to='/'className={styles.ProjectLink} activeClassName={styles.Active}>
+                            <i className="fa-solid fa-list-check"></i>
+                        </NavLink>
+                        )
+    const handleSignOut = async () => {
+        try{
+            await axios.post('/dj-rest-auth/logout/');
+            setCurrentUser(null);
+        } catch (err) {
+            console.log(err);
+        }
+    }
     // User context-based nav elements
     const loggedInUserIcons = <>
-                                <NavLink to='/'>
-                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                <NavLink to={`/profiles/${currentUser?.profile_id}/`} className={styles.NavLink} activeClassName={styles.Active}>
+                                    <Avatar src={currentUser?.profile_pic} height={50}/>
                                 </NavLink>
-                                <NavLink to='/'>
-                                    <i class="fa-solid fa-list-check"></i>
-                                </NavLink>
-                                <NavLink to='/'>
-                                    {currentUser?.username}
+                                <NavLink 
+                                    to='/' 
+                                    className={styles.NavLink}
+                                    onClick={handleSignOut} 
+                                >
+                                    <i className="fa-solid fa-right-from-bracket"></i>
                                 </NavLink>
                               </>
     const loggedOutUserIcons = <>
                                 <NavLink to="/signin" className={styles.NavLink} activeClassName={styles.Active}>
-                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                    <i className="fa-solid fa-right-to-bracket"></i>
                                 </NavLink>
                                 <NavLink to="/register" className={styles.NavLink} activeClassName={styles.Active}>
-                                    <i class="fa-solid fa-user-plus"></i>
+                                    <i className="fa-solid fa-user-plus"></i>
                                 </NavLink>
                             
                          </>
@@ -40,6 +57,7 @@ const NavBar = () => {
                     </Navbar.Brand>
                     <Navbar.Brand className={styles.Title}>Crack-It</Navbar.Brand>
                 </NavLink>
+                {currentUser && projectIcon}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className={styles.collapse} id="basic-navbar-nav">
                         <Nav className="ml-auto text-left">
