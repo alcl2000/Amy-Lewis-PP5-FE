@@ -1,10 +1,15 @@
-import React from 'react'
+import React from 'react';
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
-import { Col, Container, Row, Form } from 'react-bootstrap';
+import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import styles from '../../styles/ProjectCreateForm.module.css'
+import styles from '../../styles/ProjectCreateForm.module.css';
+import ReactDatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css"
+
 
 const ProjectCreateForm = () => {
+    //Form Logic
+
     //User logic
     const currentUser = useCurrentUser()
     const loggedOutUserPage = (
@@ -51,6 +56,12 @@ const ProjectCreateForm = () => {
                             <option>5</option>
                         </Form.Control>
                     </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Set a deadline</Form.Label>
+                        <Form.Text>Picking a deadline can help you stay on track to achieve your goals!</Form.Text>
+                        <ReactDatePicker />
+                    </Form.Group>
+                    <Button variant='info' block type='submit'>Submit</Button>
                 </Form>
             </Container>
         </>
