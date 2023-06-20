@@ -20,7 +20,7 @@ const HomePage = () => {
                     <SideBar />
                 </Col>
             </Row>
-            <Link className='btn btn-large btn-info' to='/'>Add a Project</Link>
+            <Link className='btn btn-large btn-info' to={'/projects/create'}>Add a Project</Link>
         </Container> 
     );
     const loggedOutContent = (
