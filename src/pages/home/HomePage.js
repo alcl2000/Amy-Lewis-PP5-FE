@@ -3,7 +3,7 @@ import hero from '../../assets/hero.png';
 import {ProjectCalendar } from '../../components/ProjectCalendar';
 import { SideBar } from '../../components/SideBar';
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
-import styles from '../../styles/HomePage.css';
+import styles from '../../styles/HomePage.module.css';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const HomePage = () => {
