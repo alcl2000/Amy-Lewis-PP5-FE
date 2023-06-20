@@ -24,9 +24,10 @@ const ProjectCreateForm = () => {
     const handleChange = (event) => {
         setProjectData({
             ...projectData,
-            [event.target.name]: event.target.value
-        })
-    }
+            [event.target.name]: event.target.value,
+        });
+        console.log(deadline)
+    };
     //User logic
     const currentUser = useCurrentUser()
     const loggedOutUserPage = (
@@ -50,22 +51,51 @@ const ProjectCreateForm = () => {
         <>
             <Container>
                 <Form>
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="title">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" placeholder="Title" />
+                        <Form.Control 
+                            type="text" 
+                            placeholder="Title"
+                            name='title'
+                            value={title} 
+                            onChange={handleChange}
+                        />
                         <Form.Text>Give your project a unique, memorable name!</Form.Text>
                     </Form.Group>
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="goals">
                         <Form.Label>Goals</Form.Label>
                         <Form.Text>You can set up to three goals for your project!</Form.Text>
-                        <Form.Control className={styles.GoalInput} type="text" placeholder="Goal 1" />
-                        <Form.Control className={styles.GoalInput} type="text" placeholder="Goal 2" />
-                        <Form.Control className={styles.GoalInput} type="text" placeholder="Goal 3" />
+                        <Form.Control 
+                            className={styles.GoalInput} 
+                            type="text"
+                            name='goal1'
+                            value={goal1}
+                            onChange={handleChange} 
+                            placeholder="Goal 1" 
+                            />
+                        <Form.Control
+                             className={styles.GoalInput} 
+                             type="text" placeholder="Goal 2"
+                             name='goal2'
+                             value={goal2}
+                            onChange={handleChange} 
+                        />
+                        <Form.Control 
+                            className={styles.GoalInput} 
+                            type="text" placeholder="Goal 3"
+                            name='goal3'
+                            value={goal3}
+                            onChange={handleChange} 
+                        />
                     </Form.Group>
-                    <Form.Group controlId="exampleForm.ControlSelect1">
+                    <Form.Group controlId="color">
                         <Form.Label>Pick a colour</Form.Label>
                         <Form.Text>Make your project stand out and make it easier to identify!</Form.Text>
-                        <Form.Control as="select">
+                        <Form.Control as="select"
+                            name='color'
+                            value={color}
+                            onChange={handleChange}
+                            >
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -73,10 +103,14 @@ const ProjectCreateForm = () => {
                             <option>5</option>
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group controlId="deadline">
                         <Form.Label>Set a deadline</Form.Label>
                         <Form.Text>Picking a deadline can help you stay on track to achieve your goals!</Form.Text>
-                        <ReactDatePicker />
+                        <input type='datetime-local'
+                            name='deadline' 
+                            onChange={handleChange} 
+                            value={deadline}
+                        />
                     </Form.Group>
                     <Button variant='info' block type='submit'>Submit</Button>
                 </Form>

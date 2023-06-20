@@ -26,8 +26,6 @@ function SignInForm(){
         try{
             const {data} = await axios.post('/dj-rest-auth/login/', loginData);
             setCurrentUser(data.user);
-
-            // setTokenTimestamp(data);
             history.push('/');
         } catch (err) {
             setErrors(err.response?.data);
