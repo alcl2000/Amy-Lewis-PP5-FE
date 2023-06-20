@@ -1,3 +1,4 @@
+import { Col, Container, Row } from 'react-bootstrap';
 import hero from '../../assets/hero.png';
 import {ProjectCalendar } from '../../components/ProjectCalendar';
 import { SideBar } from '../../components/SideBar';
@@ -10,10 +11,16 @@ const HomePage = () => {
     const currentUser = useCurrentUser()
     
     const loggedInContent = (
-        <>
-        < ProjectCalendar />
-        <SideBar />
-        </>
+        <Container>
+            <Row>
+                <Col>
+                < ProjectCalendar />
+                </Col>
+                <Col>
+                    <SideBar />
+                </Col>
+            </Row>
+        </Container> 
     );
     const loggedOutContent = (
         <>
