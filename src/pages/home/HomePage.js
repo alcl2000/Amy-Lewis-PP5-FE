@@ -1,4 +1,5 @@
 import hero from '../../assets/hero.png';
+import {ProjectCalendar } from '../../components/ProjectCalendar';
 import { SideBar } from '../../components/SideBar';
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import styles from '../../styles/HomePage.css';
@@ -10,6 +11,7 @@ const HomePage = () => {
     
     const loggedInContent = (
         <>
+        < ProjectCalendar />
         <SideBar />
         </>
     );
