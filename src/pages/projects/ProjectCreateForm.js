@@ -21,6 +21,12 @@ const ProjectCreateForm = () => {
     const [errors, setErrors] = useState({});
     // Submit logic 
     // Change logic
+    const handleChange = (event) => {
+        setProjectData({
+            ...projectData,
+            [event.target.name]: event.target.value
+        })
+    }
     //User logic
     const currentUser = useCurrentUser()
     const loggedOutUserPage = (
