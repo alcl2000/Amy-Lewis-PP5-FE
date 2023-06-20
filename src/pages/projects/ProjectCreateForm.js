@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
@@ -9,7 +9,18 @@ import "react-datepicker/dist/react-datepicker.css"
 
 const ProjectCreateForm = () => {
     //Form Logic
-
+    const [projectData, setProjectData] = useState({
+        title: "",
+        goal1: "",
+        goal2: "",
+        goal3: "",
+        color: "",
+        deadline: "",
+    });
+    const {title, goal1, goal2, goal3, color, deadline} = projectData;
+    const [errors, setErrors] = useState({});
+    // Submit logic 
+    // Change logic
     //User logic
     const currentUser = useCurrentUser()
     const loggedOutUserPage = (
