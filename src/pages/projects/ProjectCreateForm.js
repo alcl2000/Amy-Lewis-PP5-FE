@@ -2,6 +2,7 @@ import React from 'react'
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import { Col, Container, Row, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import styles from '../../styles/ProjectCreateForm.module.css'
 
 const ProjectCreateForm = () => {
     //User logic
@@ -35,19 +36,19 @@ const ProjectCreateForm = () => {
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Goals</Form.Label>
                         <Form.Text>You can set up to three goals for your project!</Form.Text>
-                        <Form.Control type="text" placeholder="Goal 1" />
-                        <Form.Control type="text" placeholder="Goal 2" />
-                        <Form.Control type="text" placeholder="Goal 3" />
+                        <Form.Control className={styles.GoalInput} type="text" placeholder="Goal 1" />
+                        <Form.Control className={styles.GoalInput} type="text" placeholder="Goal 2" />
+                        <Form.Control className={styles.GoalInput} type="text" placeholder="Goal 3" />
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlSelect1">
                         <Form.Label>Pick a colour</Form.Label>
                         <Form.Text>Make your project stand out and make it easier to identify!</Form.Text>
                         <Form.Control as="select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
                         </Form.Control>
                     </Form.Group>
                 </Form>
@@ -56,9 +57,11 @@ const ProjectCreateForm = () => {
     )
     //JSX return statement
     return (
-        <div>
-            <h1>Create a New project</h1>
-            {currentUser ? loggedInUserPage : loggedOutUserPage}
+        <div className={styles.Body}>
+            <h1 className={styles.Title}>Create a New project</h1>
+            <Container className={styles.MainContent}>
+                {currentUser ? loggedInUserPage : loggedOutUserPage}
+            </Container>
         </div>
     );
 }
