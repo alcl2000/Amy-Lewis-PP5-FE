@@ -14,12 +14,13 @@ const HomePage = () => {
         <Container>
             <Row>
                 <Col>
-                < ProjectCalendar />
+                    < ProjectCalendar />
                 </Col>
                 <Col>
                     <SideBar />
                 </Col>
             </Row>
+            <Link className='btn btn-large btn-info' to='/'>Add a Project</Link>
         </Container> 
     );
     const loggedOutContent = (
