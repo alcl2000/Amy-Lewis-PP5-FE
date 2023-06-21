@@ -8,10 +8,11 @@ import { useCurrentUser } from "./contexts/CurrentUserContexts";
 import SignUpForm from './pages/auth/SignUpForm'
 import SignInForm from './pages/auth/SignInForm'
 import HomePage from './pages/home/HomePage';
+import ProjectCreateForm from './pages/projects/ProjectCreateForm';
 
 function App() {
-    /*JSX Return Statement */
     const currentUser = useCurrentUser();
+    /*JSX Return Statement */
     return (
         <div className="App">
             <NavBar />
@@ -19,7 +20,8 @@ function App() {
                 <Switch>
                     <Route exact path='/register' render={() => <SignUpForm />} />
                     <Route exact path='/signin' render={() => <SignInForm />} />
-                    <Route render={() => <HomePage />} />
+                    <Route exact path='/' render={() => <HomePage />} />
+                    <Route exact path='/projects/create' render={() => <ProjectCreateForm />} />
                 </Switch>
             </Container>
         </div>
