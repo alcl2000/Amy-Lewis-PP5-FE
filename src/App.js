@@ -9,6 +9,7 @@ import SignUpForm from './pages/auth/SignUpForm'
 import SignInForm from './pages/auth/SignInForm'
 import HomePage from './pages/home/HomePage';
 import ProjectCreateForm from './pages/projects/ProjectCreateForm';
+import ProfileDetail from './pages/profiles/ProfileDetail'
 
 function App() {
     const currentUser = useCurrentUser();
@@ -22,6 +23,7 @@ function App() {
                     <Route exact path='/signin' render={() => <SignInForm />} />
                     <Route exact path='/' render={() => <HomePage />} />
                     <Route exact path='/projects/create' render={() => <ProjectCreateForm />} />
+                    <Route exact path='/profiles/:id' render={() => <ProfileDetail />} />
                 </Switch>
             </Container>
         </div>
