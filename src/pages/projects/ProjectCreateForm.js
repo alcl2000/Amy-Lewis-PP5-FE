@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import styles from '../../styles/ProjectCreateForm.module.css';
-import ReactDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"
+import { axiosReq } from '../../api/axiosDefaults';
 
 
 const ProjectCreateForm = () => {
     //Form Logic
     const [projectData, setProjectData] = useState({
+
         title: "",
         goal1: "",
         goal2: "",
@@ -17,8 +18,19 @@ const ProjectCreateForm = () => {
         color: "",
         deadline: "",
     });
+    const history = useHistory();
     const {title, goal1, goal2, goal3, color, deadline} = projectData;
     const [errors, setErrors] = useState({});
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try{
+            const {data} = await axiosReq.post('/projects/', projectData);
+            history.push(`/projects/${data.id}`);
+        } catch (err){
+            setErrors(err.response?.data);
+            console.log(err);
+        }
+    }
     // Submit logic 
     // Change logic
     const handleChange = (event) => {
@@ -26,7 +38,6 @@ const ProjectCreateForm = () => {
             ...projectData,
             [event.target.name]: event.target.value,
         });
-        console.log(deadline)
     };
     //User logic
     const currentUser = useCurrentUser()
@@ -50,7 +61,7 @@ const ProjectCreateForm = () => {
     const loggedInUserPage = (
         <>
             <Container>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="title">
                         <Form.Label>Title</Form.Label>
                         <Form.Control 
@@ -112,7 +123,7 @@ const ProjectCreateForm = () => {
                             value={deadline}
                         />
                     </Form.Group>
-                    <Button variant='info' block type='submit'>Submit</Button>
+                    <Button variant='info' block type='submit'>Create Project</Button>
                 </Form>
             </Container>
         </>
