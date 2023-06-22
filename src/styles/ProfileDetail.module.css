@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+.Body{
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-top: 30px;
+    max-width: 75%;
+    padding: 20px 10px;
+    border:  5px solid #38AECC;
+    background-color: #BEF2FF;
+    border-radius: 40px;
+}

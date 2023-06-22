@@ -1,8 +1,10 @@
-import React, { Profiler, useEffect, useState } from 'react'
-import { Container, Image } from 'react-bootstrap'
+import React, {useEffect, useState } from 'react'
+import { Col, Container, Row} from 'react-bootstrap'
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
+import Avatar from '../../components/Avatar';
+import styles from '../../styles/ProfileDetail.module.css'
 
 
 const ProfileDetail = (props) => {
@@ -37,10 +39,16 @@ const ProfileDetail = (props) => {
         fetchData();
     }, [setProfileData])
   return (
-    <Container>
-        <h2>{profileData.owner}</h2>
-        <h3>{profileData.id}</h3>
-        <Image src={profileData.profile_pic} />
+    <Container className={styles.Body}>
+        <Row noGutters={true}>
+            <Col sm={1}>
+                <i className="fa-solid fa-ellipsis"></i>
+            </Col>
+            <Col sm={11}>
+                <Avatar src={profileData.profile_pic} height={200}/>
+            </Col>
+        </Row>
+        <h2>Hi I'm {profileData.owner}</h2>
     </Container>
   )
 }
