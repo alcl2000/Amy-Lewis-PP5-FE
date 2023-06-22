@@ -8,9 +8,10 @@ import { axiosReq } from '../../api/axiosDefaults';
 const ProfileDetail = (props) => {
     const {id} = useParams();
     const [profileData, setProfileData] = useState({
-        username: "",
+        owner: "",
         id: id,
         bio: "",
+        profile_pic: "",
     });
     
     // User context + owner context
@@ -21,7 +22,14 @@ const ProfileDetail = (props) => {
         const fetchData = async () => {
             try{
                 const {data} =  await axiosReq.get(`/profiles/${id}`)
-                setProfileData({data});
+                console.log(data)
+                setProfileData({
+                    ...profileData,
+                    owner: data.owner,
+                    profile_pic : data.profile_pic,
+                    bio: data.bio,
+                });
+                console.log(profileData)
             } catch (err){
                 console.log(err, 'profile')
             }
@@ -32,7 +40,7 @@ const ProfileDetail = (props) => {
     <Container>
         <h2>{profileData.owner}</h2>
         <h3>{profileData.id}</h3>
-        <Image src={profileData.image} />
+        <Image src={profileData.profile_pic} />
     </Container>
   )
 }
