@@ -104,14 +104,14 @@ const ProjectCreateForm = () => {
                         <Form.Text>Make your project stand out and make it easier to identify!</Form.Text>
                         <Form.Control as="select"
                             name='color'
-                            value={color}
                             onChange={handleChange}
                             >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option value={'red'}>Red</option>
+                            <option value={'orange'}>Orange</option>
+                            <option value={'yellow'}>Yellow</option>
+                            <option value={'green'}>Green</option>
+                            <option value={'blue'}>Blue</option>
+                            <option value={'purple'}>Purple</option>
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="deadline">
