@@ -21,10 +21,8 @@ const SignUpForm = () => {
           ...signUpData,
           [event.target.name]: event.target.value,
         });
-        console.log(signUpData)
       };
     const handleSubmit = async (event) => {
-        console.log(signUpData)
         event.preventDefault();
         try {
             await axios.post("/dj-rest-auth/registration/", signUpData);
@@ -62,6 +60,7 @@ const SignUpForm = () => {
                             placeholder="Password"
                             value={password1}
                             onChange={handleChange}
+                            name='password1'
                         />
                     </Form.Group>
                     {errors.password1?.map((message, idx) => (
@@ -76,6 +75,7 @@ const SignUpForm = () => {
                             placeholder="Confirm Password"
                             value={password2}
                             onChange={handleChange}
+                            name='password2'
                         />
                     </Form.Group>
                     {errors.password2?.map((message, idx) => (
