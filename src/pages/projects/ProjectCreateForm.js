@@ -8,9 +8,9 @@ import { axiosReq } from '../../api/axiosDefaults';
 
 
 const ProjectCreateForm = () => {
+    const currentUser = useCurrentUser()
     //Form Logic
     const [projectData, setProjectData] = useState({
-
         title: "",
         goal1: "",
         goal2: "",
@@ -21,6 +21,7 @@ const ProjectCreateForm = () => {
     const history = useHistory();
     const {title, goal1, goal2, goal3, color, deadline} = projectData;
     const [errors, setErrors] = useState({});
+    // Submit logic 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try{
@@ -28,10 +29,10 @@ const ProjectCreateForm = () => {
             history.push(`/projects/${data.id}`);
         } catch (err){
             setErrors(err.response?.data);
+            console.log(currentUser)
             console.log(err);
         }
     }
-    // Submit logic 
     // Change logic
     const handleChange = (event) => {
         setProjectData({
@@ -40,7 +41,6 @@ const ProjectCreateForm = () => {
         });
     };
     //User logic
-    const currentUser = useCurrentUser()
     const loggedOutUserPage = (
         <>
             <div>
