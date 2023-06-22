@@ -48,7 +48,16 @@ const ProfileDetail = (props) => {
                 <Avatar src={profileData.profile_pic} height={200}/>
             </Col>
         </Row>
-        <h2>Hi I'm {profileData.owner}</h2>
+        <Row>
+            <Col sm={1}>
+            </Col>
+            <Col sm={11}>
+                <h2>
+                    Hi I'm 
+                    <span className={styles.Highlight}> {profileData.owner}</span>
+                </h2>
+            </Col>
+        </Row>
     </Container>
   )
 }
