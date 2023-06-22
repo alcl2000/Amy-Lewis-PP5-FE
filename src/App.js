@@ -9,6 +9,8 @@ import SignUpForm from './pages/auth/SignUpForm'
 import SignInForm from './pages/auth/SignInForm'
 import HomePage from './pages/home/HomePage';
 import ProjectCreateForm from './pages/projects/ProjectCreateForm';
+import { Router } from 'react-router-dom/cjs/react-router-dom.min';
+import TaskCreateForm from './pages/tasks/TaskCreateForm';
 
 function App() {
     const currentUser = useCurrentUser();
@@ -22,6 +24,7 @@ function App() {
                     <Route exact path='/signin' render={() => <SignInForm />} />
                     <Route exact path='/' render={() => <HomePage />} />
                     <Route exact path='/projects/create' render={() => <ProjectCreateForm />} />
+                    <Route exact path='/tasks/create' render={()=> <TaskCreateForm />} />
                 </Switch>
             </Container>
         </div>
