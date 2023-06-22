@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import styles from '../../styles/ProjectCreateForm.module.css';
 import "react-datepicker/dist/react-datepicker.css"
@@ -72,6 +72,9 @@ const ProjectCreateForm = () => {
                             onChange={handleChange}
                         />
                         <Form.Text>Give your project a unique, memorable name!</Form.Text>
+                        {errors.title?.map((message, idx)=> {
+                            <Alert variant='warning' key={idx}>{message}</Alert>
+                        })}
                     </Form.Group>
                     <Form.Group controlId="goals">
                         <Form.Label>Goals</Form.Label>
@@ -84,6 +87,9 @@ const ProjectCreateForm = () => {
                             onChange={handleChange} 
                             placeholder="Goal 1" 
                             />
+                            {errors.goal1?.map((message, idx)=> {
+                                <Alert variant='warning' key={idx}>{message}</Alert>
+                            })}
                         <Form.Control
                              className={styles.GoalInput} 
                              type="text" placeholder="Goal 2"
@@ -91,6 +97,9 @@ const ProjectCreateForm = () => {
                              value={goal2}
                             onChange={handleChange} 
                         />
+                            {errors.goal2?.map((message, idx)=> {
+                                <Alert variant='warning' key={idx}>{message}</Alert>
+                            })}
                         <Form.Control 
                             className={styles.GoalInput} 
                             type="text" placeholder="Goal 3"
@@ -98,6 +107,9 @@ const ProjectCreateForm = () => {
                             value={goal3}
                             onChange={handleChange} 
                         />
+                            {errors.goal3?.map((message, idx)=> {
+                                <Alert variant='warning' key={idx}>{message}</Alert>
+                            })}
                     </Form.Group>
                     <Form.Group controlId="color">
                         <Form.Label>Pick a colour</Form.Label>
@@ -113,6 +125,9 @@ const ProjectCreateForm = () => {
                             <option value={'blue'}>Blue</option>
                             <option value={'purple'}>Purple</option>
                         </Form.Control>
+                        {errors.color?.map((message, idx)=> {
+                                <Alert variant='warning' key={idx}>{message}</Alert>
+                            })}
                     </Form.Group>
                     <Form.Group controlId="deadline">
                         <Form.Label>Set a deadline</Form.Label>
@@ -122,8 +137,14 @@ const ProjectCreateForm = () => {
                             onChange={handleChange} 
                             value={deadline}
                         />
+                            {errors.deadline?.map((message, idx)=> {
+                                <Alert variant='warning' key={idx}>{message}</Alert>
+                            })}
                     </Form.Group>
                     <Button variant='info' block type='submit'>Create Project</Button>
+                    {errors.non_field_errors?.map((message, idx)=> {
+                                <Alert variant='warning' key={idx}>{message}</Alert>
+                            })}
                 </Form>
             </Container>
         </>
