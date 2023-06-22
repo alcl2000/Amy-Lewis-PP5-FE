@@ -39,26 +39,41 @@ const ProfileDetail = (props) => {
         fetchData();
     }, [setProfileData])
   return (
-    <Container className={styles.Body}>
-        <Row noGutters={true}>
-            <Col sm={1}>
-                <i className="fa-solid fa-ellipsis"></i>
-            </Col>
-            <Col sm={11}>
-                <Avatar src={profileData.profile_pic} height={200}/>
-            </Col>
-        </Row>
-        <Row>
-            <Col sm={1}>
-            </Col>
-            <Col sm={11}>
-                <h2>
-                    Hi I'm 
-                    <span className={styles.Highlight}> {profileData.owner}</span>
-                </h2>
-            </Col>
-        </Row>
-    </Container>
+    <div className={styles.Body}>
+        <Container className={styles.Card}>
+            <Row noGutters={true}>
+                { isOwner? 
+                    <Col sm={1}>
+                        <i className="fa-solid fa-ellipsis"></i>
+                    </Col> :
+                    <Col sm={1}></Col>
+                }   
+                <Col sm={11}>
+                    <Avatar src={profileData.profile_pic} height={200}/>
+                </Col>
+            </Row>
+            <Row>
+                <Col sm={1}>
+                </Col>
+                <Col sm={11}>
+                    <h2>
+                        Hi I'm 
+                        <span className={styles.Highlight}> {profileData.owner}</span>
+                    </h2>
+                </Col>
+            </Row>
+            <Row>
+                <Col sm={1}></Col>
+                <Col sm={11}>
+                {profileData?.bio ? <p>{profileData.bio}</p> : <p>Here's what I'm working on:</p>}
+                </Col>
+            </Row>
+            
+        </Container>
+        <Container>
+            Projects
+        </Container>
+    </div>
   )
 }
 
