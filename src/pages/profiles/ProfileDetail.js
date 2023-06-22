@@ -1,16 +1,19 @@
-import React, { Profiler, useEffect, useState } from 'react'
-import { Container, Image } from 'react-bootstrap'
+import React, {useEffect, useState } from 'react'
+import { Col, Container, Row} from 'react-bootstrap'
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
+import Avatar from '../../components/Avatar';
+import styles from '../../styles/ProfileDetail.module.css'
 
 
 const ProfileDetail = (props) => {
     const {id} = useParams();
     const [profileData, setProfileData] = useState({
-        username: "",
+        owner: "",
         id: id,
         bio: "",
+        profile_pic: "",
     });
     
     // User context + owner context
@@ -21,7 +24,14 @@ const ProfileDetail = (props) => {
         const fetchData = async () => {
             try{
                 const {data} =  await axiosReq.get(`/profiles/${id}`)
-                setProfileData({data});
+                console.log(data)
+                setProfileData({
+                    ...profileData,
+                    owner: data.owner,
+                    profile_pic : data.profile_pic,
+                    bio: data.bio,
+                });
+                console.log(profileData)
             } catch (err){
                 console.log(err, 'profile')
             }
@@ -29,11 +39,41 @@ const ProfileDetail = (props) => {
         fetchData();
     }, [setProfileData])
   return (
-    <Container>
-        <h2>{profileData.owner}</h2>
-        <h3>{profileData.id}</h3>
-        <Image src={profileData.image} />
-    </Container>
+    <div className={styles.Body}>
+        <Container className={styles.Card}>
+            <Row noGutters={true}>
+                { isOwner? 
+                    <Col sm={1}>
+                        <i className="fa-solid fa-ellipsis"></i>
+                    </Col> :
+                    <Col sm={1}></Col>
+                }   
+                <Col sm={11}>
+                    <Avatar src={profileData.profile_pic} height={200}/>
+                </Col>
+            </Row>
+            <Row>
+                <Col sm={1}>
+                </Col>
+                <Col sm={11}>
+                    <h2>
+                        Hi I'm 
+                        <span className={styles.Highlight}> {profileData.owner}</span>
+                    </h2>
+                </Col>
+            </Row>
+            <Row>
+                <Col sm={1}></Col>
+                <Col sm={11}>
+                {profileData?.bio ? <p>{profileData.bio}</p> : <p>Here's what I'm working on:</p>}
+                </Col>
+            </Row>
+            
+        </Container>
+        <Container>
+            Projects
+        </Container>
+    </div>
   )
 }
 
