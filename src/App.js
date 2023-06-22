@@ -10,6 +10,8 @@ import SignInForm from './pages/auth/SignInForm'
 import HomePage from './pages/home/HomePage';
 import ProjectCreateForm from './pages/projects/ProjectCreateForm';
 import ProfileDetail from './pages/profiles/ProfileDetail'
+import TaskCreateForm from './pages/tasks/TaskCreateForm';
+
 
 function App() {
     const currentUser = useCurrentUser();
@@ -24,6 +26,7 @@ function App() {
                     <Route exact path='/' render={() => <HomePage />} />
                     <Route exact path='/projects/create' render={() => <ProjectCreateForm />} />
                     <Route exact path='/profiles/:id' render={() => <ProfileDetail />} />
+                    <Route exact path='/tasks/create' render={()=> <TaskCreateForm />} />
                 </Switch>
             </Container>
         </div>
