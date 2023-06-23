@@ -31,7 +31,6 @@ const ProfileDetail = (props) => {
                     profile_pic : data.profile_pic,
                     bio: data.bio,
                 });
-                console.log(profileData)
             } catch (err){
                 console.log(err, 'profile')
             }
@@ -48,27 +47,16 @@ const ProfileDetail = (props) => {
                     </Col> :
                     <Col sm={1}></Col>
                 }   
-                <Col sm={11}>
+                <Col sm={10}>
                     <Avatar src={profileData.profile_pic} height={200}/>
                 </Col>
-            </Row>
-            <Row>
-                <Col sm={1}>
-                </Col>
-                <Col sm={11}>
-                    <h2>
-                        Hi I'm 
-                        <span className={styles.Highlight}> {profileData.owner}</span>
-                    </h2>
-                </Col>
-            </Row>
-            <Row>
                 <Col sm={1}></Col>
-                <Col sm={11}>
-                {profileData?.bio ? <p>{profileData.bio}</p> : <p>Here's what I'm working on:</p>}
-                </Col>
             </Row>
-            
+            <h2 className={styles.Introduction}>
+                Hi I'm 
+                <span className={styles.Highlight}> {profileData.owner}</span>
+            </h2>
+        {profileData?.bio ? <p>{profileData.bio}</p> : <p>Here's what I'm working on:</p>}
         </Container>
         <Container>
             Projects
