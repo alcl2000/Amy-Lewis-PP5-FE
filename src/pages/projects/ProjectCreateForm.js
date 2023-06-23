@@ -15,7 +15,7 @@ const ProjectCreateForm = () => {
         goal1: "",
         goal2: "",
         goal3: "",
-        color: "",
+        color: "red",
         deadline: "",
     });
     const history = useHistory();
@@ -29,8 +29,6 @@ const ProjectCreateForm = () => {
             history.push(`/projects/${data.id}`);
         } catch (err){
             setErrors(err.response?.data);
-            console.log(currentUser)
-            console.log(err);
         }
     }
     // Change logic
