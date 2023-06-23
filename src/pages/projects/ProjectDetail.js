@@ -1,14 +1,55 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Col, Row} from 'react-bootstrap'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { axiosReq } from '../../api/axiosDefaults';
+import Avatar from '../../components/Avatar';
+import loading from '../../assets/loading.gif'
 
 const ProjectDetail = () => {
-  return (
-    <section>
+    //Set up
+    const {id} = useParams();
+    const [hasLoaded, setHasLoaded] = useState(false);
+    const [projectData, setProjectData] = useState({
+        id: id,
+        title: "",
+        owner_id: "",
+        owner: "",
+        goal_1: "",
+        goal_2: "",
+        goal_3: "",
+        created_on: "",
+        deadline: "",
+        color: "",
+        tasks: "",
+        members: "",
+    })
+    //GET request
+    useEffect( () => {
+        const fetchData = async () => {
+            try{
+                const{data} = await axiosReq.get(`/projects/${id}`);
+                setProjectData((prevState) => ({
+                    ...prevState,
+                    projectData : data
+                }));
+                console.log(projectData);
+                setHasLoaded(true)
+            } catch (err){
+                console.log(err)
+            }
+        };
+        fetchData();
+    }, [setProjectData, id])
+    // has loaded states
+    const loadedFalse = <>
+                        <Avatar src={loading} height={200} />
+                        </>
+    const loadedTrue = (
+        <section>
         <Container>
             <Row>
                 <Col sm={3}>
-                    <h3>Project:</h3>
+                    <h3>Project: {projectData.title}</h3>
                 </Col>
                 <Col sm={6}></Col>
                 <Col sm={3}>
@@ -34,6 +75,12 @@ const ProjectDetail = () => {
             </Row>
         </Container>
     </section>
+    )
+    //JSX return statement
+  return (
+    <div>
+    { hasLoaded ? loadedTrue : loadedFalse}
+    </div>
   )
 }
 
