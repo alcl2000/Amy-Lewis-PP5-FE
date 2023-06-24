@@ -25,8 +25,13 @@ const ProjectDetail = () => {
         };
         fetchData();
     }, [setProjectData, id])
+    //Is owner logic 
+    const isOwnerIcon = <Row>
+                            <Col sm={11}></Col>
+                            <Col sm={1}><i className="fa-solid fa-ellipsis"></i></Col>
+                        </Row>
     //Goals
-    
+
 
     
     // has loaded states
@@ -36,6 +41,7 @@ const ProjectDetail = () => {
     const loadedTrue = (
         <section>
         <Container>
+            {projectData.is_owner ? isOwnerIcon : <></>}
             <Row>
                 <Col sm={3}>
                     <h3>Project: {projectData.title}</h3>
