@@ -30,21 +30,21 @@ const ProjectDetail = () => {
     const history = useHistory();
     const [popUp, setPopUp] = useState({
         show: false,
-        id: null,
+        id: projectData.id,
     });
-    const handleDelete =  (id) => {
+    const handleDelete =  () => {
         setPopUp({
-            show: true,
-            id,
+            show: true
         })
     }
-    const handleDeleteTrue = async (id) => {
-        await axios.delete(`/projects/${id}`);
-        setPopUp({
-            show: false,
-            id: null,
-        })
-        history.push('/')
+    const handleDeleteTrue = async () => {
+        try{
+            await axios.delete(`/projects/${id}`);
+            history.push('/')
+        } catch (err){
+            console.log(err)
+        }
+        
     }
     const handleDeleteFalse = () => {
         setPopUp({
