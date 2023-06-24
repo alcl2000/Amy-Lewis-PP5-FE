@@ -9,30 +9,13 @@ const ProjectDetail = () => {
     //Set up
     const {id} = useParams();
     const [hasLoaded, setHasLoaded] = useState(false);
-    const [projectData, setProjectData] = useState({
-        id: id,
-        title: "",
-        owner_id: "",
-        owner: "",
-        goal_1: "",
-        goal_2: "",
-        goal_3: "",
-        created_on: "",
-        deadline: "",
-        color: "",
-        tasks: "",
-        members: "",
-    })
+    const [projectData, setProjectData] = useState({})
     //GET request
     useEffect( () => {
         const fetchData = async () => {
             try{
-                const{data} = await axiosReq.get(`/projects/${id}`);
-                setProjectData((prevState) => ({
-                    ...prevState,
-                    projectData : data
-                }));
-                console.log(projectData);
+                const data = await axiosReq.get(`/projects/${id}`);
+                setProjectData(data.data);
                 setHasLoaded(true)
             } catch (err){
                 console.log(err)
