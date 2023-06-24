@@ -61,7 +61,7 @@ const ProjectDetail = () => {
                                     <i className="fa-solid fa-ellipsis"></i>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Edit Project</Dropdown.Item>
+                                    <Dropdown.Item href={`/projects/edit/${id}`}>Edit Project</Dropdown.Item>
                                     <Dropdown.Item onClick={handleDelete}>Delete Project</Dropdown.Item>
                                 </Dropdown.Menu>
                                 </Dropdown>
