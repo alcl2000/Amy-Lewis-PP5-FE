@@ -24,7 +24,6 @@ const ProfileDetail = (props) => {
         const fetchData = async () => {
             try{
                 const {data} =  await axiosReq.get(`/profiles/${id}`)
-                console.log(data)
                 setProfileData({
                     ...profileData,
                     owner: data.owner,
@@ -37,6 +36,7 @@ const ProfileDetail = (props) => {
         }
         fetchData();
     }, [setProfileData])
+    //JSX return statement
   return (
     <div className={styles.Body}>
         <Container className={styles.Card}>

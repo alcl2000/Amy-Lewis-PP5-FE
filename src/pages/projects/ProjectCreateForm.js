@@ -12,14 +12,14 @@ const ProjectCreateForm = () => {
     //Form Logic
     const [projectData, setProjectData] = useState({
         title: "",
-        goal1: "",
-        goal2: "",
-        goal3: "",
-        color: "",
+        goal_1: "",
+        goal_2: "",
+        goal_3: "",
+        color: "red",
         deadline: "",
     });
     const history = useHistory();
-    const {title, goal1, goal2, goal3, color, deadline} = projectData;
+    const {title, goal_1, goal_2, goal_3, color, deadline} = projectData;
     const [errors, setErrors] = useState({});
     // Submit logic 
     const handleSubmit = async (event) => {
@@ -29,8 +29,6 @@ const ProjectCreateForm = () => {
             history.push(`/projects/${data.id}`);
         } catch (err){
             setErrors(err.response?.data);
-            console.log(currentUser)
-            console.log(err);
         }
     }
     // Change logic
@@ -82,8 +80,8 @@ const ProjectCreateForm = () => {
                         <Form.Control 
                             className={styles.GoalInput} 
                             type="text"
-                            name='goal1'
-                            value={goal1}
+                            name='goal_1'
+                            value={goal_1}
                             onChange={handleChange} 
                             placeholder="Goal 1" 
                             />
@@ -92,9 +90,10 @@ const ProjectCreateForm = () => {
                             })}
                         <Form.Control
                              className={styles.GoalInput} 
-                             type="text" placeholder="Goal 2"
-                             name='goal2'
-                             value={goal2}
+                             type="text" 
+                             placeholder="Goal 2"
+                             name='goal_2'
+                             value={goal_2}
                             onChange={handleChange} 
                         />
                             {errors.goal2?.map((message, idx)=> {
@@ -103,8 +102,8 @@ const ProjectCreateForm = () => {
                         <Form.Control 
                             className={styles.GoalInput} 
                             type="text" placeholder="Goal 3"
-                            name='goal3'
-                            value={goal3}
+                            name='goal_3'
+                            value={goal_3}
                             onChange={handleChange} 
                         />
                             {errors.goal3?.map((message, idx)=> {
@@ -117,6 +116,7 @@ const ProjectCreateForm = () => {
                         <Form.Control as="select"
                             name='color'
                             onChange={handleChange}
+                            value={color}
                             >
                             <option value={'red'}>Red</option>
                             <option value={'orange'}>Orange</option>
