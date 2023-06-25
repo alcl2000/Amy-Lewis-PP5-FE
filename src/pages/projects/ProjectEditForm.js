@@ -26,18 +26,19 @@ const ProjectEditForm = () => {
         const handleMount = async () => {
             try{
                 const {data} = await axiosReq.get(`/projects/${id}`);
-                const {title, goal_1, goal_2, goal_3, color, deadline} = data;
+                console.log(data)
+                const {title, goal_1, goal_2, goal_3, color, deadline, is_owner} = data;
+                is_owner ? setProjectData({title, goal_1, goal_2, goal_3, color, deadline }) : history.push('/')
             } catch (err){
-                console.log(err)
             }
         };
         handleMount()
-    }, [id])
+    },[]);
     // Submit logic 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try{
-            const {data} = await axiosReq.post('/projects/', projectData);
+            const {data} = await axiosReq.put(`/projects/${id}`, projectData);
             history.push(`/projects/${data.id}`);
         } catch (err){
             setErrors(err.response?.data);
