@@ -30,7 +30,7 @@ function App() {
                     <Route exact path='/projects/:id' render={() => <ProjectDetail/>} />
                     <Route exact path='/projects/edit/:id' render={() => <ProjectEditForm />} />
                     <Route exact path='/profiles/:id' render={() => <ProfileDetail />} />
-                    <Route exact path='/tasks/create' render={()=> <TaskCreateForm />} />
+                    <Route exact path='/projects/:id/tasks-create' render={()=> <TaskCreateForm />} />
                 </Switch>
             </Container>
         </div>
