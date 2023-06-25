@@ -1,15 +1,16 @@
 import React from 'react'
 import { Container, Form, Row, Col, Button} from 'react-bootstrap'
+import styles from '../../styles/TaskCreateForm.module.css'
 
 const TaskCreateForm = () => {
     //Return statement 
     return (
         <div>
-            <Container>
+            <Container className={styles.Container}>
                 <h2>
                     Create a new Task
                 </h2>
-                <Form>
+                <Form className={styles.Form}>
                     <Form.Group as={Row}>
                         <Form.Label column sm={6}>Creating new task in project:</Form.Label>
                         <Col sm={6}>
