@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Col, Row} from 'react-bootstrap'
-import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { Container, Col, Row, Dropdown, Modal, Button} from 'react-bootstrap'
+import { Link, useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults';
 import Avatar from '../../components/Avatar';
 import loading from '../../assets/loading.gif'
+import axios from 'axios';
 
 const ProjectDetail = () => {
     //Set up
@@ -25,8 +26,57 @@ const ProjectDetail = () => {
         };
         fetchData();
     }, [setProjectData, id])
+    // Delete project functions
+    const history = useHistory();
+    const [popUp, setPopUp] = useState({
+        show: false,
+        id: projectData.id,
+    });
+    const handleDelete =  () => {
+        setPopUp({
+            show: true
+        })
+    }
+    const handleDeleteTrue = async () => {
+        try{
+            await axios.delete(`/projects/${id}`);
+            history.push('/')
+        } catch (err){
+            console.log(err)
+        }
+        
+    }
+    const handleDeleteFalse = () => {
+        setPopUp({
+            show:false,
+            id: null,
+        })
+    }
+    //Is owner logic 
+    const isOwnerIcon = <Row>
+                            <Col sm={11}></Col>
+                            <Col sm={1}>
+                            <Dropdown>
+                                <Dropdown.Toggle id="dropdown-basic">
+                                    <i className="fa-solid fa-ellipsis"></i>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href={`/projects/edit/${id}`}>Edit Project</Dropdown.Item>
+                                    <Dropdown.Item onClick={handleDelete}>Delete Project</Dropdown.Item>
+                                </Dropdown.Menu>
+                                </Dropdown>
+                            </Col>
+                            {popUp.show === true ? (
+                                <Modal show={popUp.show}>
+                                    <Modal.Title>Are you sure you want to delete?</Modal.Title>
+                                    <Modal.Body>This action cannot be undone! you will lose all progress!</Modal.Body>
+                                    <Button onClick={handleDeleteTrue} variant='success'>Yes I'm sure</Button>
+                                    <Button onClick={handleDeleteFalse} variant='warning'>No</Button>
+                                </Modal>
+                            ): <></>}
+                        </Row>
     //Goals
-    
+
 
     
     // has loaded states
@@ -36,6 +86,7 @@ const ProjectDetail = () => {
     const loadedTrue = (
         <section>
         <Container>
+            {projectData.is_owner ? isOwnerIcon : <></>}
             <Row>
                 <Col sm={3}>
                     <h3>Project: {projectData.title}</h3>
