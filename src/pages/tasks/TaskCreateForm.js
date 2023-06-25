@@ -47,12 +47,17 @@ const TaskCreateForm = () => {
             history.push(`tasks/${data.id}`)
         } catch(err){
             setErrors(err.response?.data);
+            console.log(errors)
+            console.log(important)
         }
     }
     //Change logic
-    const handleChange = () => {
-        console.log(project)
-    }
+    const handleChange = (event) => {
+        setTaskData({
+            ...taskData,
+            [event.target.name]: event.target.value,
+        });
+    };
     //Return statement 
     return (
         <div>
@@ -60,7 +65,7 @@ const TaskCreateForm = () => {
                 <h2>
                     Create a new Task
                 </h2>
-                <Form className={styles.Form}>
+                <Form className={styles.Form} onSubmit={handleSubmit}>
                     <Form.Group as={Row}>
                         <Form.Label column sm={6}>Creating new task in project:</Form.Label>
                         <Col sm={6}>
@@ -76,8 +81,13 @@ const TaskCreateForm = () => {
                     <Form.Group controlId="formGroupEmail" as={Row}>
                         <Form.Label column sm={6}>Description</Form.Label>
                         <Col sm={6}>
-                            <Form.Control type="text" placeholder="Describe task" 
-                                onChange={handleChange}/>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Describe task" 
+                                onChange={handleChange}
+                                name='title'
+                                value={title}
+                            />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row}>
@@ -87,7 +97,10 @@ const TaskCreateForm = () => {
                                 type="checkbox"
                                 id="autoSizingCheck"
                                 className="mb-2"
-                                label="Important task"
+                                label="Task is important"
+                                onChange={handleChange}
+                                name='important'
+                                value={important}
                             />
                         </Col>
                     </Form.Group>
@@ -95,10 +108,12 @@ const TaskCreateForm = () => {
                         <Form.Label>Set a deadline</Form.Label>
                         <Form.Text>Picking a deadline can help you stay on track to achieve your goals!</Form.Text>
                         <input type='datetime-local'
-                            name='deadline' 
+                            name='due_date'
+                            value={due_date}
+                            onChange={handleChange} 
                         />
                     </Form.Group>
-                    <Button type='submit' variant='info'>Create Task</Button>
+                    <Button type='submit' block variant='info'>Create Task</Button>
                 </Form>
             </Container>
         </div>
