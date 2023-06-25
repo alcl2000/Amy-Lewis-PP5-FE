@@ -102,7 +102,7 @@ const ProjectDetail = () => {
                 <Col sm={4}>Goal 3: {projectData.goal_3}</Col>
             </Row>
             <Row>
-                <Col sm={6}><Link to='/tasks/create' className='btn btn-large pill btn-info rounded-pill'>+ Add a new Task</Link></Col>
+                <Col sm={6}><Link to={`/projects/${id}/tasks-create`} className='btn btn-large pill btn-info rounded-pill'>+ Add a new Task</Link></Col>
                 <Col sm={6}>Add new members</Col>
             </Row>
         </Container>

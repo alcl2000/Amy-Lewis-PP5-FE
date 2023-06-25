@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Form, Row, Col, Button} from 'react-bootstrap'
 import styles from '../../styles/TaskCreateForm.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContexts'
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults'
+import axios from 'axios'
 
 const TaskCreateForm = () => {
     //Form logic
     const currentUser = useCurrentUser();
-    const projectId = useParams();
+    const {projectId}= useParams();
     const [taskData, setTaskData] =  useState({
         project: projectId,
         title: "", 
