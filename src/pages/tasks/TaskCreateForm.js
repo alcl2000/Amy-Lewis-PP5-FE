@@ -9,16 +9,35 @@ import axios from 'axios'
 const TaskCreateForm = () => {
     //Form logic
     const currentUser = useCurrentUser();
-    const {projectId}= useParams();
+    const {id} = useParams();
     const [taskData, setTaskData] =  useState({
-        project: projectId,
+        project: id,
         title: "", 
         important: false,
         progress: "not_started",
         due_date: "",
     });
+    const [projectTitle, setProjectTitle] = useState("")
     const {project, title, important, progress, due_date} = taskData;
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState();
+    //Get project title etc
+    useEffect(() => {
+        const handleMount = async () =>{
+            try{
+                const projectData = await axiosReq.get(`/projects/${id}`);
+                console.log(projectData.data.title)
+                setProjectTitle(projectData.data.title)
+                setTaskData({
+                    ...taskData,
+                    project: id,
+                })
+            } catch(err){
+                console.log(err);
+                console.log(id);
+            }
+        };
+        handleMount()
+    }, [])
     //Subumit logic
     const history = useHistory();
     const handleSubmit = async (event) => {
@@ -46,7 +65,7 @@ const TaskCreateForm = () => {
                         <Form.Label column sm={6}>Creating new task in project:</Form.Label>
                         <Col sm={6}>
                             <Form.Control type="text" 
-                                placeholder={project}
+                                placeholder={projectTitle}
                                 readOnly 
                                 plaintext
                                 name='project'
