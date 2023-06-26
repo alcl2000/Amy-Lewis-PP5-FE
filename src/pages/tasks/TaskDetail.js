@@ -25,9 +25,17 @@ const TaskDetail = () => {
         };
         fetchData();
     }, [setTaskData, id])
+    //Boolean values
+    const importantIcon = (
+        <h1><i className="fa-solid fa-star"></i></h1>
+    )
+    const notImportantIcon = (
+        <h1><i className="fa-regular fa-star"></i></h1>
+    )
     //Loaded status
     const hasLoadedContent = (<>
                 <Container>
+                    {taskData.important ? importantIcon : notImportantIcon }
                     <h3>Due: {taskData.due_date}</h3>
                     <h4>{taskData.title}</h4>
                     <h4>{taskData.progress}</h4>
