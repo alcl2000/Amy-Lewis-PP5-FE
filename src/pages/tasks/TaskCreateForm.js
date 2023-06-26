@@ -13,7 +13,7 @@ const TaskCreateForm = () => {
     const [taskData, setTaskData] =  useState({
         project: id,
         title: "", 
-        important: false,
+        important: true,
         progress: "not_started",
         due_date: "",
     });
@@ -44,7 +44,7 @@ const TaskCreateForm = () => {
         event.preventDefault();
         try{
             const {data} = await axiosReq.post(`/tasks/`, taskData);
-            history.push(`tasks/${data.id}`)
+            history.replace(`tasks/${data.id}`)
         } catch(err){
             setErrors(err.response?.data);
             console.log(errors)
@@ -52,6 +52,13 @@ const TaskCreateForm = () => {
         }
     }
     //Change logic
+    const handleCheckBox = (event) => {
+        setTaskData({
+            ...taskData,
+            important: event.target.checked
+        })
+    }
+
     const handleChange = (event) => {
         setTaskData({
             ...taskData,
@@ -98,7 +105,7 @@ const TaskCreateForm = () => {
                                 id="autoSizingCheck"
                                 className="mb-2"
                                 label="Task is important"
-                                onChange={handleChange}
+                                onChange={handleCheckBox}
                                 name='important'
                                 value={important}
                             />
