@@ -43,15 +43,14 @@ const ProjectDetail = () => {
             history.push('/')
         } catch (err){
             console.log(err)
-        }
-        
-    }
+        };  
+    };
     const handleDeleteFalse = () => {
         setPopUp({
             show:false,
             id: null,
-        })
-    }
+        });
+    };
     //Is owner logic 
     const isOwnerIcon = <Row>
                             <Col sm={11}></Col>
