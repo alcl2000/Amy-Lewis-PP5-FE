@@ -1,14 +1,19 @@
 import loading from '../../assets/loading.gif'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults';
-import { Container } from 'react-bootstrap';
+import { Container, Modal, Button } from 'react-bootstrap';
 import Avatar from '../../components/Avatar'
 import styles from '../../styles/TaskDetail.module.css'
+import axios from 'axios'
 
 const TaskDetail = () => {
     const {id} = useParams();
     const [hasLoaded, setHasLoaded] = useState(false);
+    const [showPopUp, setShowPopUp] = useState({
+        show: false, 
+        id: id
+    })
     const [taskData, setTaskData] = useState({
         title: "",
     });
@@ -26,6 +31,27 @@ const TaskDetail = () => {
         };
         fetchData();
     }, [setTaskData, id])
+    //Delete handler
+    const handleDelete = () => {
+        setShowPopUp({
+            show: true,
+        })
+    }
+    const history = useHistory();
+    const handleDeleteTrue = async () => {
+        try{
+            await axios.delete(`/tasks/${id}`);
+            history.push('/')
+        } catch (err){
+            console.log(err)
+        };  
+    };
+    const handleDeleteFalse = () => {
+        setShowPopUp({
+            show:false,
+            id: null,
+        });
+    };
     //Boolean values
     const importantIcon = (
         <h1><i className="fa-solid fa-star"></i></h1>
@@ -41,7 +67,16 @@ const TaskDetail = () => {
                     <h4>{taskData.title}</h4>
                     <h4>{taskData.progress}</h4>
                 </Container>
-                <h4>[Delete Task?]</h4>
+                <h4 onClick={handleDelete}>[Delete Task?]</h4>
+                {/* Popup modal */}
+                {showPopUp.show === true ? (
+                                <Modal show={showPopUp.show}>
+                                    <Modal.Title>Are you sure you want to delete?</Modal.Title>
+                                    <Modal.Body>This action cannot be undone! you will lose all progress!</Modal.Body>
+                                    <Button onClick={handleDeleteTrue} variant='success'>Yes I'm sure</Button>
+                                    <Button onClick={handleDeleteFalse} variant='warning'>No</Button>
+                                </Modal>
+                            ): <></>}
                 </>
         );
     const hasNotLoadedContent = (
