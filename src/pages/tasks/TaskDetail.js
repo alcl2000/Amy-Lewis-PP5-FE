@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults';
 import { Container } from 'react-bootstrap';
 import Avatar from '../../components/Avatar'
+import styles from '../../styles/TaskDetail.module.css'
 
 const TaskDetail = () => {
     const {id} = useParams();
@@ -34,7 +35,7 @@ const TaskDetail = () => {
     )
     //Loaded status
     const hasLoadedContent = (<>
-                <Container>
+                <Container className={styles.Container}>
                     {taskData.important ? importantIcon : notImportantIcon }
                     <h3>Due: {taskData.due_date}</h3>
                     <h4>{taskData.title}</h4>
@@ -48,7 +49,7 @@ const TaskDetail = () => {
     )
     // JSX return statement
     return (
-    <div>
+    <div className={styles.Page}>
         {hasLoaded? hasLoadedContent : hasNotLoadedContent}
     </div>
     )
