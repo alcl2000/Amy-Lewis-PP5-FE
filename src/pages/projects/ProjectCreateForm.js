@@ -9,6 +9,10 @@ import { axiosReq } from '../../api/axiosDefaults';
 
 const ProjectCreateForm = () => {
     const currentUser = useCurrentUser()
+    const [validationError, setValidationError] = useState({
+        show : false,
+        message: ""
+    });
     //Form Logic
     const [projectData, setProjectData] = useState({
         title: "",
@@ -28,8 +32,15 @@ const ProjectCreateForm = () => {
             const {data} = await axiosReq.post('/projects/', projectData);
             history.push(`/projects/${data.id}`);
         } catch (err){
+            if(err.response.status === 400){
+                setValidationError({
+                    show: true,
+                    message: 'You must fill out all the marked fields!'})
+            }
+            else{
             setErrors(err.response?.data);
-        }
+            }
+        }   
     }
     // Change logic
     const handleChange = (event) => {
@@ -61,7 +72,7 @@ const ProjectCreateForm = () => {
             <Container>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="title">
-                        <Form.Label>Title</Form.Label>
+                        <Form.Label>Title <span className={styles.Warning}> *</span></Form.Label>
                         <Form.Control 
                             type="text" 
                             placeholder="Title"
@@ -111,7 +122,7 @@ const ProjectCreateForm = () => {
                             })}
                     </Form.Group>
                     <Form.Group controlId="color">
-                        <Form.Label>Pick a colour</Form.Label>
+                        <Form.Label>Pick a colour <span className={styles.Warning}> *</span></Form.Label>
                         <Form.Text>Make your project stand out and make it easier to identify!</Form.Text>
                         <Form.Control as="select"
                             name='color'
@@ -130,7 +141,7 @@ const ProjectCreateForm = () => {
                             })}
                     </Form.Group>
                     <Form.Group controlId="deadline">
-                        <Form.Label>Set a deadline</Form.Label>
+                        <Form.Label>Set a deadline <span className={styles.Warning}> *</span></Form.Label>
                         <Form.Text>Picking a deadline can help you stay on track to achieve your goals!</Form.Text>
                         <input type='datetime-local'
                             name='deadline' 
@@ -142,9 +153,10 @@ const ProjectCreateForm = () => {
                             })}
                     </Form.Group>
                     <Button variant='info' block type='submit'>Create Project</Button>
-                    {errors.non_field_errors?.map((message, idx)=> {
-                                <Alert variant='warning' key={idx}>{message}</Alert>
-                            })}
+                    {validationError.show === true? (
+                        <Alert variant='warning'>{validationError.message}</Alert>
+                    ): <></>}
+                    <Form.Text><em className={styles.Warning}>Fields marked with a * must be filled out</em></Form.Text>
                 </Form>
             </Container>
         </>

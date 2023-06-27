@@ -9,3 +9,6 @@
     font-family: 'IBM Plex Sans', sans-serif;
     margin: 0 0 auto;
 }
+.Warning{
+    color: red;
+}
