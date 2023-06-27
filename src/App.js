@@ -13,6 +13,7 @@ import ProfileDetail from './pages/profiles/ProfileDetail'
 import TaskCreateForm from './pages/tasks/TaskCreateForm';
 import ProjectDetail from './pages/projects/ProjectDetail';
 import ProjectEditForm from './pages/projects/ProjectEditForm';
+import TaskDetail from './pages/tasks/TaskDetail';
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
                     <Route exact path='/projects/:id' render={() => <ProjectDetail/>} />
                     <Route exact path='/projects/edit/:id' render={() => <ProjectEditForm />} />
                     <Route exact path='/profiles/:id' render={() => <ProfileDetail />} />
-                    <Route exact path='/tasks/create' render={()=> <TaskCreateForm />} />
+                    <Route exact path='/projects/:id/tasks-create' render={()=> <TaskCreateForm />} />
+                    <Route exact path='/tasks/:id' render={() => <TaskDetail />} />
                 </Switch>
             </Container>
         </div>

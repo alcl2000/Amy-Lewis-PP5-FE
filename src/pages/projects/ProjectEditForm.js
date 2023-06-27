@@ -26,9 +26,8 @@ const ProjectEditForm = () => {
         const handleMount = async () => {
             try{
                 const {data} = await axiosReq.get(`/projects/${id}`);
-                console.log(data)
                 const {title, goal_1, goal_2, goal_3, color, deadline, is_owner} = data;
-                is_owner ? setProjectData({title, goal_1, goal_2, goal_3, color, deadline }) : history.push('/')
+                is_owner ? setProjectData({title, goal_1, goal_2, goal_3, color, deadline }) : history.push('/');
             } catch (err){
             }
         };

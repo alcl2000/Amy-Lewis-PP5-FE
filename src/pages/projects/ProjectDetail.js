@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Col, Row, Dropdown, Modal, Button} from 'react-bootstrap'
+import { Container, Col, Row, Dropdown, Modal, Button, Card} from 'react-bootstrap'
 import { Link, useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults';
 import Avatar from '../../components/Avatar';
 import loading from '../../assets/loading.gif'
 import axios from 'axios';
+import TaskCard from '../../components/TaskCard';
 
 const ProjectDetail = () => {
     //Set up
     const {id} = useParams();
     const [hasLoaded, setHasLoaded] = useState(false);
     const [projectData, setProjectData] = useState({})
+    const [taskData, setTaskData] = useState([]);
     const [colorDetail, setColorDetail] = useState();
     //GET request
     useEffect( () => {
@@ -18,6 +20,8 @@ const ProjectDetail = () => {
             try{
                 const data = await axiosReq.get(`/projects/${id}`);
                 setProjectData(data.data);
+                const secondaryData = await axiosReq.get(`/tasks/?filter/project=${id}`)
+                setTaskData(secondaryData.data.results)                             
                 setColorDetail(data.data.color)
                 setHasLoaded(true)
             } catch (err){
@@ -25,7 +29,7 @@ const ProjectDetail = () => {
             }
         };
         fetchData();
-    }, [setProjectData, id])
+    },[setProjectData, setTaskData, id])
     // Delete project functions
     const history = useHistory();
     const [popUp, setPopUp] = useState({
@@ -43,15 +47,14 @@ const ProjectDetail = () => {
             history.push('/')
         } catch (err){
             console.log(err)
-        }
-        
-    }
+        };  
+    };
     const handleDeleteFalse = () => {
         setPopUp({
             show:false,
             id: null,
-        })
-    }
+        });
+    };
     //Is owner logic 
     const isOwnerIcon = <Row>
                             <Col sm={11}></Col>
@@ -102,7 +105,7 @@ const ProjectDetail = () => {
                 <Col sm={4}>Goal 3: {projectData.goal_3}</Col>
             </Row>
             <Row>
-                <Col sm={6}><Link to='/tasks/create' className='btn btn-large pill btn-info rounded-pill'>+ Add a new Task</Link></Col>
+                <Col sm={6}><Link to={`/projects/${id}/tasks-create`} className='btn btn-large pill btn-info rounded-pill'>+ Add a new Task</Link></Col>
                 <Col sm={6}>Add new members</Col>
             </Row>
         </Container>
@@ -116,6 +119,9 @@ const ProjectDetail = () => {
                     Sort by:
                 </Col>
             </Row>
+            <div id='TASKS'>
+                <TaskCard data={taskData} />
+            </div>
         </Container>
     </section>
     )
