@@ -41,7 +41,7 @@ const TaskDetail = () => {
     const handleDeleteTrue = async () => {
         try{
             await axios.delete(`/tasks/${id}`);
-            history.push('/')
+            history.goBack()
         } catch (err){
             console.log(err)
         };  
