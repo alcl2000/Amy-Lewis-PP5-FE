@@ -32,7 +32,6 @@ const ProjectCreateForm = () => {
             const {data} = await axiosReq.post('/projects/', projectData);
             history.push(`/projects/${data.id}`);
         } catch (err){
-            console.log(err.response.status)
             if(err.response.status === 400){
                 setValidationError({
                     show: true,
