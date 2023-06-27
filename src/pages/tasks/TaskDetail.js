@@ -2,7 +2,7 @@ import loading from '../../assets/loading.gif'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults';
-import { Container, Modal, Button } from 'react-bootstrap';
+import { Container, Modal, Button, Link } from 'react-bootstrap';
 import Avatar from '../../components/Avatar'
 import styles from '../../styles/TaskDetail.module.css'
 import axios from 'axios'
@@ -80,7 +80,7 @@ const TaskDetail = () => {
                     <h3>Due: {taskData.due_date}</h3>
                     <h4>{taskData.title}</h4>
                     <h4>{statusChoices(taskData)}</h4>
-                    {taskData.is_owner ? <p>[Edit task?]</p> : <></>}
+                    {taskData.is_owner ? <a href={`/tasks/edit/${id}`}>[Edit task?]</a> : <></>}
                 </Container>
                 <h4 onClick={handleDelete}>[Delete Task?]</h4>
                 {/* Popup modal */}
