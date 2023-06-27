@@ -5,6 +5,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 import Avatar from '../../components/Avatar';
 import loading from '../../assets/loading.gif'
 import axios from 'axios';
+import TaskCard from '../../components/TaskCard';
 
 const ProjectDetail = () => {
     //Set up
@@ -109,6 +110,7 @@ const ProjectDetail = () => {
             <Row>
                 <Col sm={3}>
                     Tasks:
+                    <TaskCard origin='projects' id={id}/>
                 </Col>
                 <Col sm={6}></Col>
                 <Col sm={3}>
