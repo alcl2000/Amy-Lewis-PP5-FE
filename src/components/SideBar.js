@@ -9,19 +9,16 @@ export const SideBar = () => {
     const [taskData, setTaskData] = useState([]);
     const currentUser = useCurrentUser()
     const user = currentUser.username;
-    console.log(user)
     useEffect( () => {
         const fetchData = async () => {
             try{
                 const data = await axiosReq.get(`/tasks/?filter/user=${user}`)
-                console.log(currentUser)
                 setTaskData(data.data.results)                             
             } catch (err){
                 console.log(err)
             };
         };
         fetchData();
-        console.log(taskData)
     },[setTaskData, currentUser])
   return (
     <div className={styles.Container}>

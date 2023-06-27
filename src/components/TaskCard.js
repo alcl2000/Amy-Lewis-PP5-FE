@@ -12,7 +12,6 @@ const TaskCard = ({data}) => {
 
   return (
     <div>
-        {console.log(taskData, 'tasks cards')}
         {taskData.map((task) => {
             <Row>
                 <Col sm={4}>
