@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Form, Row, Col, Button} from 'react-bootstrap'
+import { Container, Form, Row, Col, Button, Alert} from 'react-bootstrap'
 import styles from '../../styles/TaskCreateForm.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContexts'
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
@@ -20,20 +20,18 @@ const TaskCreateForm = () => {
     const [projectTitle, setProjectTitle] = useState("")
     const {project, title, important, progress, due_date} = taskData;
     const [errors, setErrors] = useState();
+    const [validationError, setValidationError] = useState({
+        show : false,
+        message: ""
+    });
     //Get project title etc
     useEffect(() => {
         const handleMount = async () =>{
             try{
                 const projectData = await axiosReq.get(`/projects/${id}`);
-                console.log(projectData.data.title)
                 setProjectTitle(projectData.data.title)
-                setTaskData({
-                    ...taskData,
-                    project: id,
-                })
             } catch(err){
-                console.log(err);
-                console.log(id);
+                setErrors(err.response?.data);
             }
         };
         handleMount()
@@ -46,9 +44,14 @@ const TaskCreateForm = () => {
             const {data} = await axiosReq.post(`/tasks/`, taskData);
             history.replace(`tasks/${data.id}`)
         } catch(err){
+            if(err.response.status === 400){
+                setValidationError({
+                    show: true,
+                    message: 'You must fill out all the marked fields!'})
+            }
+            else{
             setErrors(err.response?.data);
-            console.log(errors)
-            console.log(important)
+            }
         }
     }
     //Change logic
@@ -86,7 +89,7 @@ const TaskCreateForm = () => {
                         </Col>
                     </Form.Group>
                     <Form.Group controlId="formGroupEmail" as={Row}>
-                        <Form.Label column sm={6}>Description</Form.Label>
+                        <Form.Label column sm={6}>Description <span className={styles.Warning}> *</span></Form.Label>
                         <Col sm={6}>
                             <Form.Control 
                                 type="text" 
@@ -112,7 +115,7 @@ const TaskCreateForm = () => {
                         </Col>
                     </Form.Group>
                     <Form.Group controlId="deadline">
-                        <Form.Label>Set a deadline</Form.Label>
+                        <Form.Label>Set a deadline <span className={styles.Warning}> *</span></Form.Label>
                         <Form.Text>Picking a deadline can help you stay on track to achieve your goals!</Form.Text>
                         <input type='datetime-local'
                             name='due_date'
@@ -121,6 +124,10 @@ const TaskCreateForm = () => {
                         />
                     </Form.Group>
                     <Button type='submit' block variant='info'>Create Task</Button>
+                    {validationError.show === true? (
+                        <Alert variant='warning'>{validationError.message}</Alert>
+                    ): <></>}
+                    <Form.Text><em className={styles.Warning}>Fields marked with a * must be filled out</em></Form.Text>
                 </Form>
             </Container>
         </div>
