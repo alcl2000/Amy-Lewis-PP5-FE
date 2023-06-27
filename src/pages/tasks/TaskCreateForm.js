@@ -42,7 +42,7 @@ const TaskCreateForm = () => {
         event.preventDefault();
         try{
             const {data} = await axiosReq.post(`/tasks/`, taskData);
-            history.replace(`tasks/${data.id}`)
+            history.replace(`/tasks/${data.id}`)
         } catch(err){
             if(err.response.status === 400){
                 setValidationError({
@@ -80,11 +80,10 @@ const TaskCreateForm = () => {
                         <Form.Label column sm={6}>Creating new task in project:</Form.Label>
                         <Col sm={6}>
                             <Form.Control type="text" 
-                                placeholder={projectTitle}
                                 readOnly 
                                 plaintext
                                 name='project'
-                                value={project}
+                                placeholder={projectTitle}
                                 />
                         </Col>
                     </Form.Group>
