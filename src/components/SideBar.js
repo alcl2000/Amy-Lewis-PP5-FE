@@ -25,6 +25,7 @@ export const SideBar = () => {
     },[setTaskData, currentUser])
   return (
     <div className={styles.Container}>
+        <h3>Tasks for {user}:</h3>
         <TaskCard data={taskData}/>
         <Link className='btn btn-large btn-info' to='/'>Add some here!</Link>
     </div>
