@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Col, Row, Dropdown, Modal, Button} from 'react-bootstrap'
+import { Container, Col, Row, Dropdown, Modal, Button, Card} from 'react-bootstrap'
 import { Link, useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults';
 import Avatar from '../../components/Avatar';
@@ -12,6 +12,7 @@ const ProjectDetail = () => {
     const {id} = useParams();
     const [hasLoaded, setHasLoaded] = useState(false);
     const [projectData, setProjectData] = useState({})
+    const [taskData, setTaskData] = useState([]);
     const [colorDetail, setColorDetail] = useState();
     //GET request
     useEffect( () => {
@@ -19,6 +20,8 @@ const ProjectDetail = () => {
             try{
                 const data = await axiosReq.get(`/projects/${id}`);
                 setProjectData(data.data);
+                const secondaryData = await axiosReq.get(`/tasks/?filter/project=${id}`)
+                setTaskData(secondaryData.data.results)                             
                 setColorDetail(data.data.color)
                 setHasLoaded(true)
             } catch (err){
@@ -26,7 +29,7 @@ const ProjectDetail = () => {
             }
         };
         fetchData();
-    }, [setProjectData, id])
+    },[setProjectData, setTaskData, id])
     // Delete project functions
     const history = useHistory();
     const [popUp, setPopUp] = useState({
@@ -110,13 +113,15 @@ const ProjectDetail = () => {
             <Row>
                 <Col sm={3}>
                     Tasks:
-                    <TaskCard origin='projects' id={id}/>
                 </Col>
                 <Col sm={6}></Col>
                 <Col sm={3}>
                     Sort by:
                 </Col>
             </Row>
+            <div id='TASKS'>
+                <TaskCard data={taskData} />
+            </div>
         </Container>
     </section>
     )
