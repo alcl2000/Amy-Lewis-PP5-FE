@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Form, Row, Col, Button} from 'react-bootstrap'
+import { Container, Form, Row, Col, Button, Alert} from 'react-bootstrap'
 import styles from '../../styles/TaskCreateForm.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContexts'
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
@@ -51,7 +51,7 @@ const TaskEditForm = () => {
         event.preventDefault();
         try{
             const {data} = await axiosReq.put(`/tasks/${id}`, taskData);
-            history.push(`tasks/${data.id}`)
+            history.push(`/tasks/${data.id}`)
         } catch(err){
             if(err.response.status === 400){
                 setValidationError({
