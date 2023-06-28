@@ -11,10 +11,19 @@
 - Replacing the logged in icon is the user's profile picture which also demonstrates that they are logged in
 - The logged out logo replaces the signup icon and allows users to log out when needed
 
+### Nav bar - Collapsed
+![]('../../read_me_assets/nav-collapse.jpg')
+- When the navbar is collapsed, the icons move underneath the main bar, and the bar may be collapsed further to keep the screen clear
+
 ### Sign up page 
 ![]('../../read_me_assets/sign-up-page.jpg')
 - The sign up page features fields for the user to create an account through
 - If the data is enetered incorrectly, the are given warnings and asked to resubmit
+
+### Log In page
+![]('../../read_me_assets/login-page.jpg')
+- The log in page allows users to input valid log in data to login and access their account 
+- Similar to the sign up page, if the data is incorrect and the server returns a 400 error, the user will recieve an error and be asked to resubmit
 
 ## Features that will not be implemented 
 - While the backend feature has the ability to support adding users to projects, due to time constraints, the front end app will not have this feature
