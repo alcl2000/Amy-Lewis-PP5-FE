@@ -113,7 +113,7 @@ const ProjectDetail = () => {
                 <Col sm={9}></Col>
             </Row>
             <div id='TASKS'>
-                <TaskCard data={taskData}  />
+                <Link to={`/projects/${id}/tasks-list`}>See this project's tasks</Link>
             </div>
         </Container>
     </section>
