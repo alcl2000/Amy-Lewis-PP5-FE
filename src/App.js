@@ -14,6 +14,7 @@ import TaskCreateForm from './pages/tasks/TaskCreateForm';
 import ProjectDetail from './pages/projects/ProjectDetail';
 import ProjectEditForm from './pages/projects/ProjectEditForm';
 import TaskDetail from './pages/tasks/TaskDetail';
+import TaskEditForm from './pages/tasks/TaskEditForm';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
                     <Route exact path='/profiles/:id' render={() => <ProfileDetail />} />
                     <Route exact path='/projects/:id/tasks-create' render={()=> <TaskCreateForm />} />
                     <Route exact path='/tasks/:id' render={() => <TaskDetail />} />
+                    <Route exact path='/tasks/edit/:id' render={() => <TaskEditForm />} />
                 </Switch>
             </Container>
         </div>
