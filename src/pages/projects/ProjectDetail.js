@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Col, Row, Dropdown, Modal, Button, Card} from 'react-bootstrap'
+import { Container, Col, Row, Dropdown, Modal, Button} from 'react-bootstrap'
 import { Link, useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults';
 import Avatar from '../../components/Avatar';
 import loading from '../../assets/loading.gif'
 import axios from 'axios';
 import TaskCard from '../../components/TaskCard';
+import styles from '../../styles/ProjectDetail.module.css'
 
 const ProjectDetail = () => {
     //Set up
@@ -13,7 +14,7 @@ const ProjectDetail = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [projectData, setProjectData] = useState({})
     const [taskData, setTaskData] = useState([]);
-    const [colorDetail, setColorDetail] = useState();
+    const [colorDetail, setColorDetail] = useState("");
     //GET request
     useEffect( () => {
         const fetchData = async () => {
@@ -21,11 +22,12 @@ const ProjectDetail = () => {
                 const data = await axiosReq.get(`/projects/${id}`);
                 setProjectData(data.data);
                 const secondaryData = await axiosReq.get(`/tasks/?filter/project=${id}`)
-                setTaskData(secondaryData.data.results)                             
-                setColorDetail(data.data.color)
+                setTaskData(secondaryData.data.results)  
+                setColorDetail(data.data.color)                           
                 setHasLoaded(true)
             } catch (err){
                 console.log(err)
+                //redirect to 404 page
             }
         };
         fetchData();
@@ -56,7 +58,7 @@ const ProjectDetail = () => {
         });
     };
     //Is owner logic 
-    const isOwnerIcon = <Row>
+    const isOwnerIcon = <Row className='mt-3'>
                             <Col sm={11}></Col>
                             <Col sm={1}>
                             <Dropdown>
@@ -78,19 +80,16 @@ const ProjectDetail = () => {
                                 </Modal>
                             ): <></>}
                         </Row>
-    //Goals
-
-
     
     // has loaded states
     const loadedFalse = <>
                         <Avatar src={loading} height={200} />
                         </>
     const loadedTrue = (
-        <section>
+        <section className={styles.Body}>
         <Container>
             {projectData.is_owner ? isOwnerIcon : <></>}
-            <Row>
+            <Row className={styles.Divs} >
                 <Col sm={3}>
                     <h3>Project: {projectData.title}</h3>
                 </Col>
@@ -99,28 +98,22 @@ const ProjectDetail = () => {
                     <h3>Deadline: {projectData.deadline}</h3>
                 </Col>
             </Row>
-            <Row>
+            <Row className={styles.Divs} >
                 <Col sm={4}>Goal 1: {projectData.goal_1}</Col>
                 <Col sm={4}>Goal 2: {projectData.goal_2}</Col>
                 <Col sm={4}>Goal 3: {projectData.goal_3}</Col>
             </Row>
-            <Row>
-                <Col sm={6}><Link to={`/projects/${id}/tasks-create`} className='btn btn-large pill btn-info rounded-pill'>+ Add a new Task</Link></Col>
-                <Col sm={6}>Add new members</Col>
-            </Row>
+            <Link to={`/projects/${id}/tasks-create`} className='btn btn-large pill btn-info rounded-pill mt-3'>+ Add a new Task</Link>
         </Container>
         <Container>
-            <Row>
+            <Row className='mt-3'>
                 <Col sm={3}>
                     Tasks:
                 </Col>
-                <Col sm={6}></Col>
-                <Col sm={3}>
-                    Sort by:
-                </Col>
+                <Col sm={9}></Col>
             </Row>
             <div id='TASKS'>
-                <TaskCard data={taskData} />
+                <TaskCard data={taskData}  />
             </div>
         </Container>
     </section>
