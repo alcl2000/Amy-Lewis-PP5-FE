@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import {Card, Col, Row} from 'react-bootstrap'
+import Avatar from './Avatar';
+import loader from '../assets/loading.gif'
+import {axiosReq} from '../api/axiosDefaults'
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
-const TaskCard = ({data}) => {
+const TaskCard = () => {
     //data mapping
     const [taskData, setTaskData] = useState([]);
+    const [hasLoaded, setHasLoaded] = useState(true);
+    const {id} = useParams
+
     useEffect(() => { 
-        setTaskData(data)
-        },
-        [setTaskData])
+        console.log('mounted')
+        const fetchData = async () => {
+            try{   
+                const {data} = await axiosReq.get(`/tasks/`);
+                    setTaskData(data.results)
+                    setHasLoaded(true)
+                    console.log(taskData)
+            } catch(err){
+                console.log(err)
+        };
+        fetchData()
+        }},
+        [])
 
-
-  return (
-    <div>
+    const hasLoadedIcons = (
+        <Row>
         {taskData.map((task) => {
-            <Row>
                 <Col sm={4}>
                     <Card style={{ width: '18rem' }}>
                         <Card.Body key={task.id}>
@@ -25,9 +40,16 @@ const TaskCard = ({data}) => {
                             </Card.Text>
                         </Card.Body>
                     </Card>
-                </Col>
-            </Row>
-    })}
+                </Col>})}
+        </Row>
+    )  
+    const notLoadedIcons = (
+        <Avatar src={loader} height={55} />
+    )
+
+  return (
+    <div>
+        {hasLoaded ? hasLoadedIcons : notLoadedIcons}
     </div>
   )
 }
