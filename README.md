@@ -1,3 +1,7 @@
+## Design
+
+The wireframes for this project can be found here: [the figma file for this project](https://www.figma.com/file/Xy7IknEYiA9DK80qsBmh1f/Task-Manager?type=design&node-id=0-1&mode=design&t=m6P73NpDVyaUjUIy-0)
+
 ## Features
 
 ### Nav bar - Logged out 
