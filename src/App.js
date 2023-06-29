@@ -15,6 +15,7 @@ import ProjectDetail from './pages/projects/ProjectDetail';
 import ProjectEditForm from './pages/projects/ProjectEditForm';
 import TaskDetail from './pages/tasks/TaskDetail';
 import TaskEditForm from './pages/tasks/TaskEditForm';
+import ErrorPage from './pages/error/ErrorPage'
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
                     <Route exact path='/projects/:id/tasks-create' render={()=> <TaskCreateForm />} />
                     <Route exact path='/tasks/:id' render={() => <TaskDetail />} />
                     <Route exact path='/tasks/edit/:id' render={() => <TaskEditForm />} />
+                    <Route path='*' render={() => <ErrorPage/>} />
                 </Switch>
             </Container>
         </div>
