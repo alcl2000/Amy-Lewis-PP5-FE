@@ -153,6 +153,7 @@ const ProjectCreateForm = () => {
                             })}
                     </Form.Group>
                     <Button variant='info' block type='submit'>Create Project</Button>
+                    <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Cancel</a>
                     {validationError.show === true? (
                         <Alert variant='warning'>{validationError.message}</Alert>
                     ): <></>}
