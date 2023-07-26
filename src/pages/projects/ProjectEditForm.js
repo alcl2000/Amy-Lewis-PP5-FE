@@ -154,6 +154,7 @@ const ProjectEditForm = () => {
                             ))}
                     </Form.Group>
                     <Button variant='info' block type='submit'>Create Project</Button>
+                    <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Cancel</a>
                     {errors?.non_field_errors?.map((message, idx)=> (
                                 <Alert variant='warning' key={idx}>{message}</Alert>
                             ))}
