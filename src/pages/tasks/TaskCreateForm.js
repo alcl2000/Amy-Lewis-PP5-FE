@@ -68,6 +68,22 @@ const TaskCreateForm = () => {
             [event.target.name]: event.target.value,
         });
     };
+    //User logic 
+    const loggedOutUserContent = (
+               <div>
+                <p>Sorry! Only logged in users can create tasks!</p>
+                <p>You can either:</p>
+                <Row>
+                    <Col>
+                        <Link className='btn btn-large btn-info' exact to='/signin'>Log In</Link>
+                    </Col>
+                    - or -
+                    <Col>
+                        <Link className='btn btn-large btn-info' exact to='/register'>Create an account</Link>
+                    </Col>
+                </Row>
+            </div>
+       )
     //Return statement 
     return (
         <div>
