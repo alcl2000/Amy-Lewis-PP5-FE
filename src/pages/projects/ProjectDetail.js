@@ -20,10 +20,11 @@ const ProjectDetail = () => {
             try{
                 const [{data: projectData}, {data: taskData}] = await Promise.all([
                     axiosReq.get(`/projects/${id}`), 
-                    axiosReq.get(`/tasks/?filter/project=${id}`)
+                    axiosReq.get(`/tasks/?filter/task__project=${id}`)
                 ]); 
                 setProjectData(projectData);
                 setTaskData(taskData);
+                
                 setHasLoaded(true)
             } catch (err){
                 console.log(err)
@@ -31,6 +32,7 @@ const ProjectDetail = () => {
         };
         fetchData();
     }, [id, setProjectData, setTaskData])
+    console.log(taskData)
     // Delete project functions
     const history = useHistory();
     const [popUp, setPopUp] = useState({
@@ -116,7 +118,7 @@ const ProjectDetail = () => {
                     (taskData.length  
                      ? <>
                     <ul>
-                        { taskData.map((tasks) => {
+                        { taskData.results.map((tasks) => {
                             <li key={tasks.id}>{tasks.title}</li>
                         })
                         }
