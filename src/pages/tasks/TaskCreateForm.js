@@ -123,6 +123,7 @@ const TaskCreateForm = () => {
                         />
                     </Form.Group>
                     <Button type='submit' block variant='info'>Create Task</Button>
+                    <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Cancel</a>
                     {validationError.show === true? (
                         <Alert variant='warning'>{validationError.message}</Alert>
                     ): <></>}
