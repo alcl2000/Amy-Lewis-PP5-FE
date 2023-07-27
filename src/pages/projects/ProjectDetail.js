@@ -14,24 +14,25 @@ const ProjectDetail = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [projectData, setProjectData] = useState({})
     const [taskData, setTaskData] = useState([]);
-    const [colorDetail, setColorDetail] = useState("");
     //GET request
-    useEffect( () => {
+    useEffect(() => {
         const fetchData = async () => {
             try{
-                const data = await axiosReq.get(`/projects/${id}`);
-                setProjectData(data.data);
-                const secondaryData = await axiosReq.get(`/tasks/?filter/project=${id}`)
-                setTaskData(secondaryData.data.results)  
-                setColorDetail(data.data.color)                           
+                const [{data: projectData}, {data: taskData}] = await Promise.all([
+                    axiosReq.get(`/projects/${id}`), 
+                    axiosReq.get(`/tasks/?filter/task__project=${id}`)
+                ]); 
+                setProjectData(projectData);
+                setTaskData(taskData);
+                
                 setHasLoaded(true)
             } catch (err){
                 console.log(err)
-                //redirect to 404 page
-            }
+            };
         };
         fetchData();
-    },[setProjectData, setTaskData, id])
+    }, [id, setProjectData, setTaskData])
+    console.log(taskData)
     // Delete project functions
     const history = useHistory();
     const [popUp, setPopUp] = useState({
@@ -113,7 +114,17 @@ const ProjectDetail = () => {
                 <Col sm={9}></Col>
             </Row>
             <div id='TASKS'>
-                <Link to={`/projects/${id}/tasks-list`}>See this project's tasks</Link>
+                {hasLoaded &&
+                    (taskData.length  
+                     ? <>
+                    <ul>
+                        { taskData.results.map((tasks) => {
+                            <li key={tasks.id}>{tasks.title}</li>
+                        })
+                        }
+                    </ul>
+                                </> : <p>No Tasks found</p>)
+                }
             </div>
         </Container>
     </section>
