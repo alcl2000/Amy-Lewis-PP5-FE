@@ -17,19 +17,21 @@ const TaskCreateForm = () => {
         progress: "not_started",
         due_date: "",
     });
-    const [projectTitle, setProjectTitle] = useState("")
+    const [projectTitle, setProjectTitle] = useState("");
+    const [projectOwner, setProjectOwner] = useState("");
     const {project, title, important, progress, due_date} = taskData;
     const [errors, setErrors] = useState();
     const [validationError, setValidationError] = useState({
         show : false,
         message: ""
     });
-    //Get project title etc
+    //Get project data
     useEffect(() => {
         const handleMount = async () =>{
             try{
                 const projectData = await axiosReq.get(`/projects/${id}`);
                 setProjectTitle(projectData.data.title)
+                setProjectOwner(projectData.data.owner_name)
             } catch(err){
                 setErrors(err.response?.data);
             }
@@ -145,9 +147,17 @@ const TaskCreateForm = () => {
             </Form>
         </Container>
     </div>);
+    const isProjectOwner = () => { return currentUser === projectOwner };
+    const notProjectOwnerContent = (
+        <div>
+            <h3>You are not authorised to make tasks in this project</h3>
+            <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Return</a>
+        </div>
+    )
+
     //Return statement 
     return (
-        <></>
+        currentUser ? ( isProjectOwner ? projectOwnerContent : notProjectOwnerContent) : loggedOutUserContent 
     )
 }
 
