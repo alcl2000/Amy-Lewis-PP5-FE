@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Form, Row, Col, Button, Alert} from 'react-bootstrap'
 import styles from '../../styles/TaskCreateForm.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContexts'
-import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory, useParams, Link } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults'
 import axios from 'axios'
 
@@ -17,19 +17,21 @@ const TaskCreateForm = () => {
         progress: "not_started",
         due_date: "",
     });
-    const [projectTitle, setProjectTitle] = useState("")
+    const [projectTitle, setProjectTitle] = useState("");
+    const [projectOwner, setProjectOwner] = useState("");
     const {project, title, important, progress, due_date} = taskData;
     const [errors, setErrors] = useState();
     const [validationError, setValidationError] = useState({
         show : false,
         message: ""
     });
-    //Get project title etc
+    //Get project data
     useEffect(() => {
         const handleMount = async () =>{
             try{
                 const projectData = await axiosReq.get(`/projects/${id}`);
                 setProjectTitle(projectData.data.title)
+                setProjectOwner(projectData.data.owner_name)
             } catch(err){
                 setErrors(err.response?.data);
             }
@@ -68,68 +70,94 @@ const TaskCreateForm = () => {
             [event.target.name]: event.target.value,
         });
     };
+    //User logic 
+    const loggedOutUserContent = (
+               <div className='mt-5'>
+                <h3>Sorry! Only logged in users can create tasks!</h3>
+                <p>You can either:</p>
+                <Row>
+                    <Col>
+                        <Link className='btn btn-large btn-info' exact to='/signin'>Log In</Link>
+                    </Col>
+                    - or -
+                    <Col>
+                        <Link className='btn btn-large btn-info' exact to='/register'>Create an account</Link>
+                    </Col>
+                </Row>
+            </div>
+       );
+    const projectOwnerContent = (<div>
+        <Container className={styles.Container}>
+            <h2>
+                Create a new Task
+            </h2>
+            <Form className={styles.Form} onSubmit={handleSubmit}>
+                <Form.Group as={Row}>
+                    <Form.Label column sm={6}>Creating new task in project:</Form.Label>
+                    <Col sm={6}>
+                        <Form.Control type="text" 
+                            readOnly 
+                            plaintext
+                            name='project'
+                            placeholder={projectTitle}
+                            />
+                    </Col>
+                </Form.Group>
+                <Form.Group controlId="formGroupEmail" as={Row}>
+                    <Form.Label column sm={6}>Description <span className={styles.Warning}> *</span></Form.Label>
+                    <Col sm={6}>
+                        <Form.Control 
+                            type="text" 
+                            placeholder="Describe task" 
+                            onChange={handleChange}
+                            name='title'
+                            value={title}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Form.Label column sm={6}>Mark this task as important?</Form.Label>
+                    <Col sm={6}>
+                        <Form.Check
+                            type="checkbox"
+                            id="autoSizingCheck"
+                            className="mb-2"
+                            label="Task is important"
+                            onChange={handleCheckBox}
+                            name='important'
+                            value={important}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group controlId="deadline">
+                    <Form.Label>Set a deadline <span className={styles.Warning}> *</span></Form.Label>
+                    <Form.Text>Picking a deadline can help you stay on track to achieve your goals!</Form.Text>
+                    <input type='datetime-local'
+                        name='due_date'
+                        value={due_date}
+                        onChange={handleChange} 
+                    />
+                </Form.Group>
+                <Button type='submit' block variant='info'>Create Task</Button>
+                <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Cancel</a>
+                {validationError.show === true? (
+                    <Alert variant='warning'>{validationError.message}</Alert>
+                ): <></>}
+                <Form.Text><em className={styles.Warning}>Fields marked with a * must be filled out</em></Form.Text>
+            </Form>
+        </Container>
+    </div>);
+    const isProjectOwner = () => { return currentUser === projectOwner };
+    const notProjectOwnerContent = (
+        <div>
+            <h3>You are not authorised to make tasks in this project</h3>
+            <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Return</a>
+        </div>
+    )
+
     //Return statement 
     return (
-        <div>
-            <Container className={styles.Container}>
-                <h2>
-                    Create a new Task
-                </h2>
-                <Form className={styles.Form} onSubmit={handleSubmit}>
-                    <Form.Group as={Row}>
-                        <Form.Label column sm={6}>Creating new task in project:</Form.Label>
-                        <Col sm={6}>
-                            <Form.Control type="text" 
-                                readOnly 
-                                plaintext
-                                name='project'
-                                placeholder={projectTitle}
-                                />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group controlId="formGroupEmail" as={Row}>
-                        <Form.Label column sm={6}>Description <span className={styles.Warning}> *</span></Form.Label>
-                        <Col sm={6}>
-                            <Form.Control 
-                                type="text" 
-                                placeholder="Describe task" 
-                                onChange={handleChange}
-                                name='title'
-                                value={title}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row}>
-                        <Form.Label column sm={6}>Mark this task as important?</Form.Label>
-                        <Col sm={6}>
-                            <Form.Check
-                                type="checkbox"
-                                id="autoSizingCheck"
-                                className="mb-2"
-                                label="Task is important"
-                                onChange={handleCheckBox}
-                                name='important'
-                                value={important}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group controlId="deadline">
-                        <Form.Label>Set a deadline <span className={styles.Warning}> *</span></Form.Label>
-                        <Form.Text>Picking a deadline can help you stay on track to achieve your goals!</Form.Text>
-                        <input type='datetime-local'
-                            name='due_date'
-                            value={due_date}
-                            onChange={handleChange} 
-                        />
-                    </Form.Group>
-                    <Button type='submit' block variant='info'>Create Task</Button>
-                    {validationError.show === true? (
-                        <Alert variant='warning'>{validationError.message}</Alert>
-                    ): <></>}
-                    <Form.Text><em className={styles.Warning}>Fields marked with a * must be filled out</em></Form.Text>
-                </Form>
-            </Container>
-        </div>
+        currentUser ? ( isProjectOwner ? projectOwnerContent : notProjectOwnerContent) : loggedOutUserContent 
     )
 }
 
