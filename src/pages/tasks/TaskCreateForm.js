@@ -72,8 +72,8 @@ const TaskCreateForm = () => {
     };
     //User logic 
     const loggedOutUserContent = (
-               <div>
-                <p>Sorry! Only logged in users can create tasks!</p>
+               <div className='mt-5'>
+                <h3>Sorry! Only logged in users can create tasks!</h3>
                 <p>You can either:</p>
                 <Row>
                     <Col>
