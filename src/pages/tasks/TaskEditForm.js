@@ -93,6 +93,12 @@ const TaskEditForm = () => {
                 </Row>
             </div>
     );
+    const notProjectOwnerContent = (
+        <div>
+            <h3>You are not authorised to edit this task</h3>
+            <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Return</a>
+        </div>
+    );
     //Return statement 
     return (
         <div>
