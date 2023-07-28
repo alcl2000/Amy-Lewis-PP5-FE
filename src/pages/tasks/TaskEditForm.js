@@ -93,14 +93,7 @@ const TaskEditForm = () => {
                 </Row>
             </div>
     );
-    const notProjectOwnerContent = (
-        <div>
-            <h3>You are not authorised to edit this task</h3>
-            <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Return</a>
-        </div>
-    );
-    //Return statement 
-    return (
+    const taskOwnerContent = (
         <div>
             <Container className={styles.Container}>
                 <h2>
@@ -174,6 +167,16 @@ const TaskEditForm = () => {
                 </Form>
             </Container>
         </div>
+    );
+    const notTaskOwnerContent = (
+        <div>
+            <h3>You are not authorised to edit this task</h3>
+            <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Return</a>
+        </div>
+    );
+    //Return statement 
+    return (
+        <></>
     )
 }
 
