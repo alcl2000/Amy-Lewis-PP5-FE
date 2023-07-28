@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Form, Row, Col, Button, Alert} from 'react-bootstrap'
 import styles from '../../styles/TaskCreateForm.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContexts'
-import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory, useParams, Link } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults'
 
 const TaskEditForm = () => {
@@ -77,6 +77,22 @@ const TaskEditForm = () => {
             [event.target.name]: event.target.value,
         });
     };
+    // User logic 
+    const loggedOutUserContent = (
+        <div className='mt-5'>
+                <h3>Sorry! Only logged in users can edit tasks!</h3>
+                <p>You can either:</p>
+                <Row>
+                    <Col>
+                        <Link className='btn btn-large btn-info' exact to='/signin'>Log In</Link>
+                    </Col>
+                    - or -
+                    <Col>
+                        <Link className='btn btn-large btn-info' exact to='/register'>Create an account</Link>
+                    </Col>
+                </Row>
+            </div>
+    );
     //Return statement 
     return (
         <div>
