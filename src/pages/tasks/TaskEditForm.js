@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Form, Row, Col, Button, Alert} from 'react-bootstrap'
 import styles from '../../styles/TaskCreateForm.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContexts'
-import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory, useParams, Link } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults'
 
 const TaskEditForm = () => {
@@ -11,32 +11,30 @@ const TaskEditForm = () => {
     const {id} = useParams();
     const [taskData, setTaskData] =  useState({
         project: 0,
+        is_owner: false,
         title: "", 
         important: true,
         progress: "",
         due_date: "",
     });
     const [projectTitle, setProjectTitle] = useState("")
-    const {project, title, important, progress, due_date} = taskData;
+    const {project, title, important, progress, due_date, is_owner} = taskData;
     const [errors, setErrors] = useState();
     const [validationError, setValidationError] = useState({
         show : false,
         message: ""
     });
-    //Get project title etc
+    //Get task data
     useEffect(() => {
         const handleMount = async () =>{
             try{
                 // retrieving task data
                 const {data} = await axiosReq.get(`/tasks/${id}`)
-                const {project, title, important, progress, due_date} = data
-                setTaskData({project, title, important, progress, due_date})
+                const {project, title, important, progress, due_date, is_owner} = data
+                setTaskData({project, title, important, progress, due_date, is_owner});
                 //get project data
                 const projectData = await axiosReq.get(`/projects/${data.project}`);
                 setProjectTitle(projectData.data.title)
-                console.log(taskData.project)
-
-                console.log(projectData)
             } catch(err){
                 console.log(err)
                 console.log(taskData.project)
@@ -77,12 +75,29 @@ const TaskEditForm = () => {
             [event.target.name]: event.target.value,
         });
     };
-    //Return statement 
-    return (
+    // User logic 
+    console.log(taskData.is_owner)
+    const loggedOutUserContent = (
+        <div className='mt-5'>
+                <h3>Sorry! Only logged in users can edit tasks!</h3>
+                <p>You can either:</p>
+                <Row>
+                    <Col>
+                        <Link className='btn btn-large btn-info' exact to='/signin'>Log In</Link>
+                    </Col>
+                    - or -
+                    <Col>
+                        <Link className='btn btn-large btn-info' exact to='/register'>Create an account</Link>
+                    </Col>
+                </Row>
+            </div>
+    );
+    const taskOwnerContent = (
         <div>
             <Container className={styles.Container}>
                 <h2>
-                    Create a new Task
+                    Edit Task : 
+                    <span> {taskData.title}</span>
                 </h2>
                 <Form className={styles.Form} onSubmit={handleSubmit}>
                     <Form.Group as={Row}>
@@ -152,6 +167,16 @@ const TaskEditForm = () => {
                 </Form>
             </Container>
         </div>
+    );
+    const notTaskOwnerContent = (
+        <div>
+            <h3>You are not authorised to edit this task</h3>
+            <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Return</a>
+        </div>
+    );
+    //Return statement 
+    return (
+        currentUser ? ( taskData.is_owner ? taskOwnerContent : notTaskOwnerContent)  : loggedOutUserContent
     )
 }
 
