@@ -11,12 +11,13 @@ import loader from '../assets/loading.gif'
 export const SideBar = () => {
     const [projectData, setProjectData] = useState([]);
     const currentUser = useCurrentUser()
-    const user = currentUser.pk;
+    const userId = currentUser.pk;
+    const userName = currentUser.username;
     const [hasLoaded, setHasLoaded] = useState(false);
     useEffect( () => {
         const fetchData = async () => {
             try{
-                const {data} = await axiosReq.get(`/projects/?owner=${user}`)  
+                const {data} = await axiosReq.get(`/projects/?owner=${userId}`)  
                 setProjectData(data.results)
                 setHasLoaded(true)                     
             } catch (err){
@@ -27,13 +28,15 @@ export const SideBar = () => {
     },[setProjectData, currentUser])
   return (
     <div className={styles.Container}>
-        <h3>Projects for {user}:</h3>
+        <h3>Projects for {userName}:</h3>
         { hasLoaded ? <ul>
-            {projectData.map((projects, id) => {(
-                <li key={id}>
-                    <a href=''>{projects.title}</a>
-                </li>
-            )})}
+            <li>
+                <a href={`/projects/${projectData[0].id}`}>
+                    {projectData[0].title}
+                    <br/>Due : {projectData[0].deadline}
+                    <br/>Complete?
+                </a>
+            </li>
             </ul> : 
             <Avatar src={loader} height={30} />
         }
