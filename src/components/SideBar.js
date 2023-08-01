@@ -11,12 +11,12 @@ import loader from '../assets/loading.gif'
 export const SideBar = () => {
     const [projectData, setProjectData] = useState([]);
     const currentUser = useCurrentUser()
-    const user = currentUser.username;
+    const user = currentUser.pk;
     const [hasLoaded, setHasLoaded] = useState(false);
     useEffect( () => {
         const fetchData = async () => {
             try{
-                const {data} = await axiosReq.get(`/projects/?filter/user=${user}`)   
+                const {data} = await axiosReq.get(`/projects/?owner=${user}`)  
                 setProjectData(data.results)
                 setHasLoaded(true)                     
             } catch (err){
