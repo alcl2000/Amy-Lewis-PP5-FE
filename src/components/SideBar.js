@@ -11,12 +11,14 @@ import loader from '../assets/loading.gif'
 export const SideBar = () => {
     const [projectData, setProjectData] = useState([]);
     const currentUser = useCurrentUser()
-    const user = currentUser.username;
+    const userId = currentUser.pk;
+    const userName = currentUser.username;
     const [hasLoaded, setHasLoaded] = useState(false);
+    //request
     useEffect( () => {
         const fetchData = async () => {
             try{
-                const {data} = await axiosReq.get(`/projects/?filter/user=${user}`)   
+                const {data} = await axiosReq.get(`/projects/?owner=${userId}`)  
                 setProjectData(data.results)
                 setHasLoaded(true)                     
             } catch (err){
@@ -25,19 +27,25 @@ export const SideBar = () => {
         };
         fetchData();
     },[setProjectData, currentUser])
+    // data rendering 
+    const noProjects = (
+        <>
+            <p>No Projects found!</p>
+            <Link className='btn btn-large btn-info' to='/projects/create'>Add some here!</Link>
+        </>
+    )
+    const projects = (<ul>
+        {projectData.map((project, index) => {
+            <li key={index}>{project.title}</li>
+        })}
+    </ul>)
   return (
     <div className={styles.Container}>
-        <h3>Projects for {user}:</h3>
-        { hasLoaded ? <ul>
-            {projectData.map((projects, id) => {(
-                <li key={id}>
-                    <a href=''>{projects.title}</a>
-                </li>
-            )})}
-            </ul> : 
+        <h3>Projects for {userName}:</h3>
+        { hasLoaded ? (projectData.length > 0 ? projects : noProjects) : 
             <Avatar src={loader} height={30} />
         }
-        <Link className='btn btn-large btn-info' to='/projects/create'>Add some here!</Link>
+        
         {console.log(projectData)}  
     </div>
   )

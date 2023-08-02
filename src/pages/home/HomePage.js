@@ -12,11 +12,11 @@ const HomePage = () => {
     
     const loggedInContent = (
         <Container>
-            <Row>
-                <Col>
+            <Row className='mt-5'>
+                <Col className={styles.Components}>
                     < ProjectCalendar />
                 </Col>
-                <Col>
+                <Col className={styles.Components}>
                     <SideBar />
                 </Col>
             </Row>
