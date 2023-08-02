@@ -14,6 +14,7 @@ export const SideBar = () => {
     const userId = currentUser.pk;
     const userName = currentUser.username;
     const [hasLoaded, setHasLoaded] = useState(false);
+    //request
     useEffect( () => {
         const fetchData = async () => {
             try{
@@ -26,21 +27,25 @@ export const SideBar = () => {
         };
         fetchData();
     },[setProjectData, currentUser])
+    // data rendering 
+    const noProjects = (
+        <>
+            <p>No Projects found!</p>
+            <Link className='btn btn-large btn-info' to='/projects/create'>Add some here!</Link>
+        </>
+    )
+    const projects = (<ul>
+        {projectData.map((project, index) => {
+            <li key={index}>{project.title}</li>
+        })}
+    </ul>)
   return (
     <div className={styles.Container}>
         <h3>Projects for {userName}:</h3>
-        { hasLoaded ? <ul>
-            <li>
-                <a href={`/projects/${projectData[0].id}`}>
-                    {projectData[0].title}
-                    <br/>Due : {projectData[0].deadline}
-                    <br/>Complete?
-                </a>
-            </li>
-            </ul> : 
+        { hasLoaded ? (projectData.length > 0 ? projects : noProjects) : 
             <Avatar src={loader} height={30} />
         }
-        <Link className='btn btn-large btn-info' to='/projects/create'>Add some here!</Link>
+        
         {console.log(projectData)}  
     </div>
   )
