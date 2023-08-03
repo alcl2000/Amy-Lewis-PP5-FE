@@ -104,7 +104,7 @@ const ProjectDetail = () => {
                 <Col sm={4}>Goal 2: {projectData.goal_2}</Col>
                 <Col sm={4}>Goal 3: {projectData.goal_3}</Col>
             </Row>
-            <Link to={`/projects/${id}/tasks-create`} className='btn btn-large pill btn-info rounded-pill mt-3'>+ Add a new Task</Link>
+            {projectData.is_owner ? <Link to={`/projects/${id}/tasks-create`} className='btn btn-large pill btn-info rounded-pill mt-3'>+ Add a new Task</Link> : <></>}
         </Container>
         <Container>
             <Row className='mt-3'>
