@@ -33,13 +33,13 @@ export const SideBar = () => {
             <Link className='btn btn-large btn-info' to='/projects/create'>Add some here!</Link>
         </>
     )
-    const projects = (<ul>
+    const projects = (<ul className={styles.ProjectList}>
         {projectData.map((project, index) => {
         return <li key={index}>
                 <Link to={`/projects/${project.id}`}>
-                    <Card>
-                        <h5 className='card-title'>{project.title}</h5>
-                        <p className='card-body'>Due Date: {project.deadline}</p>
+                    <Card className={styles.Cards}>
+                        <h5 className='card-title mt-1'>{project.title}</h5>
+                        <p>Due Date: {project.deadline}</p>
                     </Card>
                 </Link>
             </li>
