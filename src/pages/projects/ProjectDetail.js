@@ -116,8 +116,9 @@ const ProjectDetail = () => {
             <div id='TASKS'>
                 {hasLoaded &&
                     (taskData.results.length  
-                     ?
-                     taskData.results.map((task, index) => {return <TaskCard key={index} {...task}/> })
+                     ? <div className='row'>{
+                     taskData.results.map((task, index) => 
+                        {return<div className='col-sm-6 col-md-4 mb-4 '><TaskCard key={index} {...task}/></div>})}</div>
                      : <p>No Tasks found</p>)
                 }
             </div>
