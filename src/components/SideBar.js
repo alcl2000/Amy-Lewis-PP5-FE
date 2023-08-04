@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import styles from '../styles/SideBar.module.css'
-import TaskCard from './TaskCard'
 import {useCurrentUser } from '../contexts/CurrentUserContexts'
 import {axiosReq} from '../api/axiosDefaults'
 import { Card } from 'react-bootstrap'
@@ -26,7 +25,7 @@ export const SideBar = () => {
             };
         };
         fetchData();
-    },[setProjectData, currentUser])
+    },[setProjectData, userId])
     // data rendering 
     const noProjects = (
         <>
@@ -34,9 +33,16 @@ export const SideBar = () => {
             <Link className='btn btn-large btn-info' to='/projects/create'>Add some here!</Link>
         </>
     )
-    const projects = (<ul>
+    const projects = (<ul className={styles.ProjectList}>
         {projectData.map((project, index) => {
-            <li key={index}>{project.title}</li>
+        return <li key={index}>
+                <Link to={`/projects/${project.id}`}>
+                    <Card className={styles.Cards}>
+                        <h5 className='card-title mt-1'>{project.title}</h5>
+                        <p>Due Date: {project.deadline}</p>
+                    </Card>
+                </Link>
+            </li>
         })}
     </ul>)
   return (
@@ -45,8 +51,6 @@ export const SideBar = () => {
         { hasLoaded ? (projectData.length > 0 ? projects : noProjects) : 
             <Avatar src={loader} height={30} />
         }
-        
-        {console.log(projectData)}  
     </div>
   )
 }
