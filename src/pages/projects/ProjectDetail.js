@@ -20,7 +20,7 @@ const ProjectDetail = () => {
             try{
                 const [{data: projectData}, {data: taskData}] = await Promise.all([
                     axiosReq.get(`/projects/${id}`), 
-                    axiosReq.get(`/tasks/?filter/task__project=${id}`)
+                    axiosReq.get(`/tasks/?project=${id}`)
                 ]); 
                 setProjectData(projectData);
                 setTaskData(taskData);
@@ -115,15 +115,10 @@ const ProjectDetail = () => {
             </Row>
             <div id='TASKS'>
                 {hasLoaded &&
-                    (taskData.length  
-                     ? <>
-                    <ul>
-                        { taskData.results.map((tasks) => {
-                            <li key={tasks.id}>{tasks.title}</li>
-                        })
-                        }
-                    </ul>
-                                </> : <p>No Tasks found</p>)
+                    (taskData.results.length  
+                     ?
+                     taskData.results.map((task, index) => {return <TaskCard key={index} {...task}/> })
+                     : <p>No Tasks found</p>)
                 }
             </div>
         </Container>
