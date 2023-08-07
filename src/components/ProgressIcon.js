@@ -14,7 +14,7 @@ const ProgressIcon = ({status, height}) => {
         return backgroundColor
     }
   return (
-    <div style={{height:{height}, width:{height}}} className={`rounded-circle ${backgroundColor(status)}`}></div>
+    <div style={{height:height, width:height}} className={`rounded-circle ${backgroundColor(status)}`}></div>
   )
 }
 
