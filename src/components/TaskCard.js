@@ -1,7 +1,6 @@
 import React from 'react'
 import {Card} from 'react-bootstrap'
 import ProgressIcon from './ProgressIcon'
-import star from '../assets/star.svg'
 import styles from '../styles/TaskCard.module.css'
 
 const TaskCard = (props) => {
