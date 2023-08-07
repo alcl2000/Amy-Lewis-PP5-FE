@@ -11,7 +11,7 @@ const TaskCard = (props) => {
                 <h4>{title}</h4>
             </div>
             <div className='col-5'>
-                <p>assigned to: {owner_name}</p>
+                <p>Assigned to: {owner_name}</p>
             </div>
         </div>
         <div>
