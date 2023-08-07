@@ -9,7 +9,7 @@ const TaskCard = (props) => {
   return (
     <Card className={styles.Body}>
         <div className={styles.Content}>
-            {important ? <img src={star} height={30}/>: <></>}
+            {important ? <h2><i className="fa-solid fa-star"></i></h2>: <></>}
             <div className='row'>
                 <div className='col-7'>
                     <h4>{title}</h4>
