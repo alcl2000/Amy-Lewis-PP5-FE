@@ -120,7 +120,11 @@ const ProjectDetail = () => {
                     (taskData.results.length  
                      ? <div className='row'>{
                      taskData.results.map((task, index) => 
-                        {return <div key={index} className='col-sm-6 col-md-4 mb-4 '><Link to={`/tasks/${task.id}`}><TaskCard key={index} {...task}/></Link></div>})}</div>
+                        {return <div key={index} className='col-sm-6 col-md-4 mb-4 '>
+                                    <Link to={`/tasks/${task.id}`} className={styles.Card}>
+                                        <TaskCard key={index} {...task}/>
+                                    </Link>
+                                </div>})}</div>
                      : <p>No Tasks found</p>)
                 }
             </div>
