@@ -10,3 +10,12 @@
     opacity:0.6;
     color: white;
 }
+.Card{
+    color: black;
+    text-decoration: none;
+}
+.Card :hover{
+    color:rgb(80, 80, 80);
+    text-decoration: none;
+    font-weight: bolder;
+}
