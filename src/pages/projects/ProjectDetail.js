@@ -74,10 +74,12 @@ const ProjectDetail = () => {
                             </Col>
                             {popUp.show === true ? (
                                 <Modal show={popUp.show}>
-                                    <Modal.Title>Are you sure you want to delete?</Modal.Title>
-                                    <Modal.Body>This action cannot be undone! you will lose all progress!</Modal.Body>
-                                    <Button onClick={handleDeleteTrue} variant='success'>Yes I'm sure</Button>
-                                    <Button onClick={handleDeleteFalse} variant='warning'>No</Button>
+                                    <div className='m-2'>
+                                        <Modal.Title>Are you sure you want to delete?</Modal.Title>
+                                        <Modal.Body>This action cannot be undone! you will lose all progress!</Modal.Body>
+                                        <Button onClick={handleDeleteTrue} variant='success' className='btn-block'>Yes I'm sure</Button>
+                                        <Button onClick={handleDeleteFalse} variant='warning' className='btn-block'>Cancel</Button>
+                                    </div>
                                 </Modal>
                             ): <></>}
                         </Row>
@@ -90,7 +92,7 @@ const ProjectDetail = () => {
         <section className={styles.Body}>
         <Container>
             {projectData.is_owner ? isOwnerIcon : <></>}
-            <Row className={styles.Divs} >
+            <Row style={{backgroundColor:projectData.color}} className={styles.Divs}>
                 <Col sm={3}>
                     <h3>Project: {projectData.title}</h3>
                 </Col>
@@ -99,7 +101,7 @@ const ProjectDetail = () => {
                     <h3>Deadline: {projectData.deadline}</h3>
                 </Col>
             </Row>
-            <Row className={styles.Divs} >
+            <Row style={{background:projectData.color}} className={styles.Divs} >
                 <Col sm={4}>Goal 1: {projectData.goal_1}</Col>
                 <Col sm={4}>Goal 2: {projectData.goal_2}</Col>
                 <Col sm={4}>Goal 3: {projectData.goal_3}</Col>
@@ -107,7 +109,7 @@ const ProjectDetail = () => {
             {projectData.is_owner ? <Link to={`/projects/${id}/tasks-create`} className='btn btn-large pill btn-info rounded-pill mt-3'>+ Add a new Task</Link> : <></>}
         </Container>
         <Container>
-            <Row className='mt-3'>
+            <Row className='m-3'>
                 <Col sm={3}>
                     Tasks:
                 </Col>
