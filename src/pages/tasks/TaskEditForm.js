@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { Container, Form, Row, Col, Button, Alert} from 'react-bootstrap'
-import styles from '../../styles/TaskCreateForm.module.css'
-import { useCurrentUser } from '../../contexts/CurrentUserContexts'
-import { useHistory, useParams, Link } from 'react-router-dom/cjs/react-router-dom.min'
-import { axiosReq } from '../../api/axiosDefaults'
+import React, { useState, useEffect } from 'react';
+import { Container, Form, Row, Col, Button, Alert} from 'react-bootstrap';
+import styles from '../../styles/TaskCreateForm.module.css';
+import { useCurrentUser } from '../../contexts/CurrentUserContexts';
+import { useHistory, useParams, Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { axiosReq } from '../../api/axiosDefaults';
 
 const TaskEditForm = () => {
     //Form logic
@@ -17,7 +17,7 @@ const TaskEditForm = () => {
         progress: "",
         due_date: "",
     });
-    const [projectTitle, setProjectTitle] = useState("")
+    const [projectTitle, setProjectTitle] = useState("");
     const {project, title, important, progress, due_date, is_owner} = taskData;
     const [errors, setErrors] = useState();
     const [validationError, setValidationError] = useState({
@@ -29,45 +29,45 @@ const TaskEditForm = () => {
         const handleMount = async () =>{
             try{
                 // retrieving task data
-                const {data} = await axiosReq.get(`/tasks/${id}`)
-                const {project, title, important, progress, due_date, is_owner} = data
+                const {data} = await axiosReq.get(`/tasks/${id}`);
+                const {project, title, important, progress, due_date, is_owner} = data;
                 setTaskData({project, title, important, progress, due_date, is_owner});
                 //get project data
                 const projectData = await axiosReq.get(`/projects/${data.project}`);
-                setProjectTitle(projectData.data.title)
+                setProjectTitle(projectData.data.title);
             } catch(err){
-                console.log(err)
-                console.log(taskData.project)
+                console.log(err);
+                console.log(taskData.project);
 
             }
         };
-        handleMount()
-    }, [setTaskData, setProjectTitle])
+        handleMount();
+    }, [setTaskData, setProjectTitle]);
     //Subumit logic
     const history = useHistory();
     const handleSubmit = async (event) => {
         event.preventDefault();
         try{
             const {data} = await axiosReq.put(`/tasks/${id}`, taskData);
-            history.push(`/tasks/${data.id}`)
+            history.push(`/tasks/${data.id}`);
         } catch(err){
             if(err.response.status === 400){
                 setValidationError({
                     show: true,
-                    message: 'You must fill out all the marked fields!'})
+                    message: 'You must fill out all the marked fields!'});
             }
             else{
             setErrors(err.response?.data);
             }
         }
-    }
+    };
     //Change logic
     const handleCheckBox = (event) => {
         setTaskData({
             ...taskData,
             important: event.target.checked
-        })
-    }
+        });
+    };
 
     const handleChange = (event) => {
         setTaskData({

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { Container, Form, Row, Col, Button, Alert} from 'react-bootstrap'
-import styles from '../../styles/TaskCreateForm.module.css'
-import { useCurrentUser } from '../../contexts/CurrentUserContexts'
-import { useHistory, useParams, Link } from 'react-router-dom/cjs/react-router-dom.min'
-import { axiosReq } from '../../api/axiosDefaults'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import { Container, Form, Row, Col, Button, Alert} from 'react-bootstrap';
+import styles from '../../styles/TaskCreateForm.module.css';
+import { useCurrentUser } from '../../contexts/CurrentUserContexts';
+import { useHistory, useParams, Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { axiosReq } from '../../api/axiosDefaults';
 
 const TaskCreateForm = () => {
     //Form logic
@@ -30,14 +29,14 @@ const TaskCreateForm = () => {
         const handleMount = async () =>{
             try{
                 const projectData = await axiosReq.get(`/projects/${id}`);
-                setProjectTitle(projectData.data.title)
-                setProjectOwner(projectData.data.owner_id)
+                setProjectTitle(projectData.data.title);
+                setProjectOwner(projectData.data.owner_id);
             } catch(err){
                 setErrors(err.response?.data);
             }
         };
-        handleMount()
-    }, [])
+        handleMount();
+    }, []);
     //Subumit logic
     const history = useHistory();
     const handleSubmit = async (event) => {
@@ -49,20 +48,20 @@ const TaskCreateForm = () => {
             if(err.response.status === 400){
                 setValidationError({
                     show: true,
-                    message: 'You must fill out all the marked fields!'})
+                    message: 'You must fill out all the marked fields!'});
             }
             else{
             setErrors(err.response?.data);
             }
         }
-    }
+    };
     //Change logic
     const handleCheckBox = (event) => {
         setTaskData({
             ...taskData,
             important: event.target.checked
-        })
-    }
+        });
+    };
 
     const handleChange = (event) => {
         setTaskData({

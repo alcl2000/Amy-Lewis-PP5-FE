@@ -1,12 +1,11 @@
-import loading from '../../assets/loading.gif'
-import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import loading from '../../assets/loading.gif';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
 import { Container, Modal, Button, Link } from 'react-bootstrap';
-import Avatar from '../../components/Avatar'
-import styles from '../../styles/TaskDetail.module.css'
-import axios from 'axios'
-
+import Avatar from '../../components/Avatar';
+import styles from '../../styles/TaskDetail.module.css';
+import axios from 'axios';
 
 const TaskDetail = () => {
     const {id} = useParams();
@@ -14,10 +13,8 @@ const TaskDetail = () => {
     const [showPopUp, setShowPopUp] = useState({
         show: false, 
         id: id
-    })
-    const [taskData, setTaskData] = useState({
-        title: "",
     });
+    const [taskData, setTaskData] = useState({});
     //Get statements
     useEffect(() => {
         const fetchData = async () => {
@@ -26,14 +23,14 @@ const TaskDetail = () => {
                 setTaskData(data.data);
                 setHasLoaded(true);
             } catch(err){
-                console.log(err)
+                console.log(err);
             }
         };
         fetchData();
-    }, [setTaskData, id])
+    }, [setTaskData, id]);
     // Status display 
     const statusChoices = (taskData) => {
-        let statusMessage
+        let statusMessage;
         if (taskData.progress === 'not_started'){
             statusMessage = "Not started";
         } 
@@ -43,22 +40,22 @@ const TaskDetail = () => {
         else{
             statusMessage = 'Completed!';
         }
-        return statusMessage
-    }
+        return statusMessage;
+    };
     //Delete handler
     const handleDelete = () => {
         setShowPopUp({
             show: true,
-        })
-    }
+        });
+    };
     const history = useHistory();
     const handleDeleteTrue = async () => {
         try{
             await axios.delete(`/tasks/${id}`);
-            history.push(`/projects/${taskData.project}`)
+            history.push(`/projects/${taskData.project}`);
         } catch (err){
-            console.log(err)
-        };  
+            console.log(err);
+        }
     };
     const handleDeleteFalse = () => {
         setShowPopUp({
@@ -69,10 +66,10 @@ const TaskDetail = () => {
     //Boolean values
     const importantIcon = (
         <h1><i className="fa-solid fa-star"></i></h1>
-    )
+    );
     const notImportantIcon = (
         <h1><i className="fa-regular fa-star"></i></h1>
-    )
+    );
     //Loaded status
     const hasLoadedContent = (<>
                 <Container className={styles.Container}>
