@@ -2,20 +2,20 @@ import NavBar from './components/NavBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Switch, Route} from "react-router-dom";
-import  {Container} from "react-bootstrap"
-import './api/axiosDefaults'
+import  {Container} from "react-bootstrap";
+import './api/axiosDefaults';
 import { useCurrentUser } from "./contexts/CurrentUserContexts";
-import SignUpForm from './pages/auth/SignUpForm'
-import SignInForm from './pages/auth/SignInForm'
+import SignUpForm from './pages/auth/SignUpForm';
+import SignInForm from './pages/auth/SignInForm';
 import HomePage from './pages/home/HomePage';
 import ProjectCreateForm from './pages/projects/ProjectCreateForm';
-import ProfileDetail from './pages/profiles/ProfileDetail'
+import ProfileDetail from './pages/profiles/ProfileDetail';
 import TaskCreateForm from './pages/tasks/TaskCreateForm';
 import ProjectDetail from './pages/projects/ProjectDetail';
 import ProjectEditForm from './pages/projects/ProjectEditForm';
 import TaskDetail from './pages/tasks/TaskDetail';
 import TaskEditForm from './pages/tasks/TaskEditForm';
-import ErrorPage from './pages/error/ErrorPage'
+import ErrorPage from './pages/error/ErrorPage';
 import TaskCard from './components/TaskCard';
 
 
