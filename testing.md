@@ -2,20 +2,28 @@
 
 ## Page Validation: 
 
--![]('../../read_me_assets/app-validation.png')
+- ![]('../../read_me_assets/app-validation.png')
 
 ### Components
 
--![]('../../read_me_assets/avatar-validation.png')
--![]('../../read_me_assets/navbar-validation.png')
--![]('../../read_me_assets/progress-icon-validation.png')
--![]('../../read_me_assets/sidebar-validation.png')
+- ![]('../../read_me_assets/avatar-validation.png')
+- ![]('../../read_me_assets/navbar-validation.png')
+- ![]('../../read_me_assets/progress-icon-validation.png')
+- ![]('../../read_me_assets/sidebar-validation.png')
 
 ### Pages
 
--![]('../../read_me_assets/profile-detail-validation.png')
--![]('../../read_me_assets/project-detail-validation.png')
--![]('../../read_me_assets/task-detail-validation.png')
+- ![]('../../read_me_assets/profile-detail-validation.png')
+- ![]('../../read_me_assets/project-edit-validation.png')
+- ![]('../../read_me_assets/project-create-validation.png')
+- ![]('../../read_me_assets/project-detail-validation.png')
+- ![]('../../read_me_assets/task-create-validation.png')
+- ![]('../../read_me_assets/task-edit-validation.png')
+- ![]('../../read_me_assets/task-detail-validation.png')
+- ![]('../../read_me_assets/sign-in-form-validation.png')
+- ![]('read_me_assets/sign-up-form-validation.png')
+- ![]('read_me_assets/sign-up-form-validation.png')
+- ![]('read_me_assets/error-validation.png')
 
 ## Manual Testing:
 
