@@ -29,7 +29,7 @@ function SignInForm(){
             history.push('/');
         } catch (err) {
             setErrors(err.response?.data);
-        };
+        }
     };
     /*Event handling */
     const handleChange = (event) => {

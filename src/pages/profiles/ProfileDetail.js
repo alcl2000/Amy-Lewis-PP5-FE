@@ -1,10 +1,10 @@
-import React, {useEffect, useState } from 'react'
-import { Col, Container, Row} from 'react-bootstrap'
+import React, {useEffect, useState } from 'react';
+import { Col, Container, Row} from 'react-bootstrap';
 import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
 import Avatar from '../../components/Avatar';
-import styles from '../../styles/ProfileDetail.module.css'
+import styles from '../../styles/ProfileDetail.module.css';
 
 
 const ProfileDetail = (props) => {
@@ -23,7 +23,7 @@ const ProfileDetail = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                const {data} =  await axiosReq.get(`/profiles/${id}`)
+                const {data} =  await axiosReq.get(`/profiles/${id}`);
                 setProfileData({
                     ...profileData,
                     owner: data.owner,
@@ -31,11 +31,11 @@ const ProfileDetail = (props) => {
                     bio: data.bio,
                 });
             } catch (err){
-                console.log(err, 'profile')
+                console.log(err, 'profile');
             }
-        }
+        };
         fetchData();
-    }, [setProfileData])
+    }, [setProfileData]);
     //JSX return statement
   return (
     <div className={styles.Body}>

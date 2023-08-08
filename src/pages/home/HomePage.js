@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const HomePage = () => {
     // User Context
-    const currentUser = useCurrentUser()
+    const currentUser = useCurrentUser();
     
     const loggedInContent = (
         <Container>
