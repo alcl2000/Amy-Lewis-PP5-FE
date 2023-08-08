@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Avatar = ({src, height = 45, text}) => {
   return (

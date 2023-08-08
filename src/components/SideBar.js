@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
-import styles from '../styles/SideBar.module.css'
-import {useCurrentUser } from '../contexts/CurrentUserContexts'
-import {axiosReq} from '../api/axiosDefaults'
-import { Card } from 'react-bootstrap'
-import Avatar from './Avatar'
-import loader from '../assets/loading.gif'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import styles from '../styles/SideBar.module.css';
+import {useCurrentUser } from '../contexts/CurrentUserContexts';
+import {axiosReq} from '../api/axiosDefaults';
+import { Card } from 'react-bootstrap';
+import Avatar from './Avatar';
+import loader from '../assets/loading.gif';
 
 export const SideBar = () => {
     const [projectData, setProjectData] = useState([]);
-    const currentUser = useCurrentUser()
+    const currentUser = useCurrentUser();
     const userId = currentUser.pk;
     const userName = currentUser.username;
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -17,22 +17,22 @@ export const SideBar = () => {
     useEffect( () => {
         const fetchData = async () => {
             try{
-                const {data} = await axiosReq.get(`/projects/?owner=${userId}`)  
-                setProjectData(data.results)
-                setHasLoaded(true)                     
+                const {data} = await axiosReq.get(`/projects/?owner=${userId}`);
+                setProjectData(data.results);
+                setHasLoaded(true);                     
             } catch (err){
-                console.log(err)
-            };
+                console.log(err);
+            }
         };
         fetchData();
-    },[setProjectData, userId])
+    },[setProjectData, userId]);
     // data rendering 
     const noProjects = (
         <>
             <p>No Projects found!</p>
             <Link className='btn btn-large btn-info' to='/projects/create'>Add some here!</Link>
         </>
-    )
+    );
     const projects = (<ul className={styles.ProjectList}>
         {projectData.map((project, index) => {
         return <li key={index}>
@@ -43,8 +43,8 @@ export const SideBar = () => {
                     </Card>
                 </Link>
             </li>
-        })}
-    </ul>)
+        })};
+    </ul>);
   return (
     <div className={styles.Container}>
         <h3>Projects for {userName}:</h3>

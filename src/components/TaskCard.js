@@ -1,10 +1,10 @@
-import React from 'react'
-import {Card} from 'react-bootstrap'
-import ProgressIcon from './ProgressIcon'
-import styles from '../styles/TaskCard.module.css'
+import React from 'react';
+import {Card} from 'react-bootstrap';
+import ProgressIcon from './ProgressIcon';
+import styles from '../styles/TaskCard.module.css';
 
 const TaskCard = (props) => {
-    const {title, important, owner_name, due_date, progress} = props
+    const {title, important, owner_name, due_date, progress} = props;
   return (
     <Card className={styles.Body}>
         <div className={styles.Content}>

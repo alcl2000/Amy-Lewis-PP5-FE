@@ -1,23 +1,23 @@
-import React from 'react'
+import React from 'react';
 
 const ProgressIcon = ({status, height}) => {
 
     const backgroundColor = (status) => {
-        let backgroundColor
+        let backgroundColor;
         if (status === 'not_started'){
             backgroundColor = 'bg-danger';
         } else if ( status === 'in_progress'){
-            backgroundColor = 'bg-warning'
+            backgroundColor = 'bg-warning';
         } else{
             backgroundColor = 'bg-success'
         }
-        return backgroundColor
+        return backgroundColor;
     }
     const statusText = (status) => {
         let statusText = status.replace('_', " ");
-        let statusMessage = statusText.toUpperCase()
-        return statusMessage
-    }
+        let statusMessage = statusText.toUpperCase();
+        return statusMessage;
+    };
   return (
     <div className='row'>
         <div className='col-2'></div>
