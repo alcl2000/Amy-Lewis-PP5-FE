@@ -1,6 +1,22 @@
 # Testing Document
 
-## Page Validation 
+## Page Validation: 
+
+-![]('../../read_me_assets/app-validation.png')
+
+### Components
+
+-![]('../../read_me_assets/avatar-validation.png')
+-![]('../../read_me_assets/navbar-validation.png')
+-![]('../../read_me_assets/progress-icon-validation.png')
+-![]('../../read_me_assets/sidebar-validation.png')
+
+### Pages
+
+-![]('../../read_me_assets/profile-detail-validation.png')
+-![]('../../read_me_assets/project-detail-validation.png')
+-![]('../../read_me_assets/task-detail-validation.png')
+
 ## Manual Testing:
 
 #### Sign-Up Page : 

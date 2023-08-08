@@ -195,7 +195,7 @@ Task detail view
 
 ## Testing:
 
-[Testing document]('/testing.md)
+[Testing document]('testing.md')
 
 
 ## Page Component Breakdown:
