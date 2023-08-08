@@ -92,12 +92,12 @@ const ProjectDetail = () => {
         <section className={styles.Body}>
         <Container>
             {projectData.is_owner ? isOwnerIcon : <></>}
-            <Row style={{backgroundColor:projectData.color}} className={styles.Divs}>
+            <Row style={{backgroundColor:projectData.color}} className={`${styles.Divs} p-3`}>
                 <Col sm={3}>
                     <h3>Project: {projectData.title}</h3>
                 </Col>
-                <Col sm={6}></Col>
-                <Col sm={3}>
+                <Col sm={4}></Col>
+                <Col sm={5}>
                     <h3>Deadline: {projectData.deadline}</h3>
                 </Col>
             </Row>
@@ -111,9 +111,12 @@ const ProjectDetail = () => {
         <Container>
             <Row className='m-3'>
                 <Col sm={3}>
-                    Tasks:
+                    <h3>Tasks:</h3>
                 </Col>
-                <Col sm={9}></Col>
+                <Col sm={4}></Col>
+                <Col sm={5}>
+                    <h3>Sort by:</h3>
+                </Col>
             </Row>
             <div id='TASKS'>
                 {hasLoaded &&
