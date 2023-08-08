@@ -76,7 +76,6 @@ const TaskEditForm = () => {
         });
     };
     // User logic 
-    console.log(taskData.is_owner)
     const loggedOutUserContent = (
         <div className='mt-5'>
                 <h3>Sorry! Only logged in users can edit tasks!</h3>
@@ -155,7 +154,7 @@ const TaskEditForm = () => {
                             >
                             <option value={'not_started'}>Not started</option>
                             <option value={'in_progress'}>In progress</option>
-                            <option value={'completed'}>Complete</option>
+                            <option value={'complete'}>Complete</option>
                         </Form.Control>
                     </Form.Group>
                     <Button type='submit' block variant='info'>Edit Task</Button>
