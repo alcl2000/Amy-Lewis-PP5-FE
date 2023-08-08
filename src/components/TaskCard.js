@@ -1,56 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import {Card, Col, Row} from 'react-bootstrap'
-import Avatar from './Avatar';
-import loader from '../assets/loading.gif'
-import {axiosReq} from '../api/axiosDefaults'
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import React from 'react'
+import {Card} from 'react-bootstrap'
+import ProgressIcon from './ProgressIcon'
+import styles from '../styles/TaskCard.module.css'
 
-const TaskCard = () => {
-    //data mapping
-    const [taskData, setTaskData] = useState([]);
-    const [hasLoaded, setHasLoaded] = useState(true);
-    const {id} = useParams
-
-    useEffect(() => { 
-        console.log('mounted')
-        const fetchData = async () => {
-            try{   
-                const {data} = await axiosReq.get(`/tasks/`);
-                    setTaskData(data.results)
-                    setHasLoaded(true)
-                    console.log(taskData)
-            } catch(err){
-                console.log(err)
-        };
-        fetchData()
-        }},
-        [])
-
-    const hasLoadedIcons = (
-        <Row>
-        {taskData.map((task) => {
-                <Col sm={4}>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Body key={task.id}>
-                            <Card.Title>{task.title}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-                            <Card.Text>
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>})}
-        </Row>
-    )  
-    const notLoadedIcons = (
-        <Avatar src={loader} height={55} />
-    )
-
+const TaskCard = (props) => {
+    const {title, important, owner_name, due_date, progress} = props
   return (
-    <div>
-        {hasLoaded ? hasLoadedIcons : notLoadedIcons}
-    </div>
+    <Card className={styles.Body}>
+        <div className={styles.Content}>
+            {important ? <h2><i className="fa-solid fa-star"></i></h2>: <></>}
+            <div className='row'>
+                <div className='col-7'>
+                    <h4>{title}</h4>
+                </div>
+                <div className='col-5'>
+                    <p>Assigned to: {owner_name}</p>
+                </div>
+            </div>
+            <div>
+                <p className='card-text'>Due date: {due_date}</p>
+                <ProgressIcon status={progress} height={20} />
+            </div>
+        </div>
+    </Card>
   )
 }
 

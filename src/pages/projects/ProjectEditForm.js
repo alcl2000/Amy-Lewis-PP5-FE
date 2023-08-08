@@ -54,7 +54,7 @@ const ProjectEditForm = () => {
     const loggedOutUserPage = (
         <>
             <div>
-                <p>Sorry! Only logged in users can create projects!</p>
+                <p>Sorry! Only the owner of this project can edit it!</p>
                 <p>You can either:</p>
                 <Row>
                     <Col>
@@ -153,7 +153,7 @@ const ProjectEditForm = () => {
                                 <Alert variant='warning' key={idx}>{message}</Alert>
                             ))}
                     </Form.Group>
-                    <Button variant='info' block type='submit'>Create Project</Button>
+                    <Button variant='info' block type='submit'>Edit Project</Button>
                     <a className='btn btn-large btn-danger btn-block' href='#' onClick={() => history.goBack()}>Cancel</a>
                     {errors?.non_field_errors?.map((message, idx)=> (
                                 <Alert variant='warning' key={idx}>{message}</Alert>
