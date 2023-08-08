@@ -31,7 +31,7 @@ const TaskCreateForm = () => {
             try{
                 const projectData = await axiosReq.get(`/projects/${id}`);
                 setProjectTitle(projectData.data.title)
-                setProjectOwner(projectData.data.owner_name)
+                setProjectOwner(projectData.data.owner_id)
             } catch(err){
                 setErrors(err.response?.data);
             }
