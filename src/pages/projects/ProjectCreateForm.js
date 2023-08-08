@@ -3,12 +3,12 @@ import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import styles from '../../styles/ProjectCreateForm.module.css';
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
 import { axiosReq } from '../../api/axiosDefaults';
 
 
 const ProjectCreateForm = () => {
-    const currentUser = useCurrentUser()
+    const currentUser = useCurrentUser();
     const [validationError, setValidationError] = useState({
         show : false,
         message: ""
@@ -35,13 +35,13 @@ const ProjectCreateForm = () => {
             if(err.response.status === 400){
                 setValidationError({
                     show: true,
-                    message: 'You must fill out all the marked fields!'})
+                    message: 'You must fill out all the marked fields!'});
             }
             else{
             setErrors(err.response?.data);
             }
         }   
-    }
+    };
     // Change logic
     const handleChange = (event) => {
         setProjectData({

@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { Container, Col, Row, Dropdown, Modal, Button} from 'react-bootstrap'
-import { Link, useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import React, { useEffect, useState } from 'react';
+import { Container, Col, Row, Dropdown, Modal, Button} from 'react-bootstrap';
+import { Link, useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
 import Avatar from '../../components/Avatar';
-import loading from '../../assets/loading.gif'
+import loading from '../../assets/loading.gif';
 import axios from 'axios';
 import TaskCard from '../../components/TaskCard';
-import styles from '../../styles/ProjectDetail.module.css'
+import styles from '../../styles/ProjectDetail.module.css';
 
 const ProjectDetail = () => {
     //Set up
     const {id} = useParams();
     const [hasLoaded, setHasLoaded] = useState(false);
-    const [projectData, setProjectData] = useState({})
+    const [projectData, setProjectData] = useState({});
     const [taskData, setTaskData] = useState([]);
     //GET request
     useEffect(() => {
@@ -24,15 +24,14 @@ const ProjectDetail = () => {
                 ]); 
                 setProjectData(projectData);
                 setTaskData(taskData);
-                
-                setHasLoaded(true)
+                setHasLoaded(true);
             } catch (err){
-                console.log(err)
-            };
+                console.log(err);
+            }
         };
         fetchData();
-    }, [id, setProjectData, setTaskData])
-    console.log(taskData)
+    }, [id, setProjectData, setTaskData]);
+    console.log(taskData);
     // Delete project functions
     const history = useHistory();
     const [popUp, setPopUp] = useState({
@@ -42,15 +41,15 @@ const ProjectDetail = () => {
     const handleDelete =  () => {
         setPopUp({
             show: true
-        })
-    }
+        });
+    };
     const handleDeleteTrue = async () => {
         try{
             await axios.delete(`/projects/${id}`);
-            history.push('/')
+            history.push('/');
         } catch (err){
-            console.log(err)
-        };  
+            console.log(err);
+        }
     };
     const handleDeleteFalse = () => {
         setPopUp({

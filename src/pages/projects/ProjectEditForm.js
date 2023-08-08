@@ -3,11 +3,11 @@ import { useCurrentUser } from '../../contexts/CurrentUserContexts';
 import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap';
 import { Link, useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import styles from '../../styles/ProjectCreateForm.module.css';
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
 import { axiosReq } from '../../api/axiosDefaults';
 
 const ProjectEditForm = () => {
-    const currentUser = useCurrentUser()
+    const currentUser = useCurrentUser();
     const {id} = useParams();
     //Form Logic
     const [projectData, setProjectData] = useState({
@@ -31,7 +31,7 @@ const ProjectEditForm = () => {
             } catch (err){
             }
         };
-        handleMount()
+        handleMount();
     },[]);
     // Submit logic 
     const handleSubmit = async (event) => {
