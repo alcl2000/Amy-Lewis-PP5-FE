@@ -1,6 +1,14 @@
 # Crack-it
 ‘Crack-it’ is a task management app. Designed to be as simple and easy to use as possible to make organising projects quick, easy, and fool-proof. The application consists of an API and a front-end React.js application. This is the documentation for the front-end React app.
 
+## Front-End Libraries used:
+
+In the process of developing this app, the following front-end libraries were used:
+
+* React: React was used to develop the front end of this app to create a fast and responsive app to enhance user experience
+* React-Bootstrap: while Bootstrap is an excellent library for developing attractive and polished websites, it can often be incompatible with react, so the react-bootstrap framework was chosen for this project, as it allows for speedy and reactive styling
+
+
 ## Design
 
 The wireframes for this project can be found here: [the figma file for this project](https://www.figma.com/file/Xy7IknEYiA9DK80qsBmh1f/Task-Manager?type=design&node-id=0-1&mode=design&t=m6P73NpDVyaUjUIy-0)
@@ -244,6 +252,19 @@ Task detail view
         * Used in the Navbar and also re-used to provide loaders on different pages that need various load states
     * Task Cards
         * Used to display basic details of a task, reused on the home and project pages
+
+## Deployment Steps:
+
+* Log into or create your Heroku account
+* Go to you dashboard and select ‘New App’ from the dropdown 
+* Pick a unique name for your app, and select a database in your region 
+* From the new app’s dashboard select a repository to link the app to
+* To deploy manually, click the ‘deploy’ button, else check the ‘allow automatic deploys’ box and select which branch to automatically deploy from
+* If your app is reliant on lots of javascript, go to the settings section of the app and scroll down to the ‘CONFIG_VARS’
+    * Add the following variables pair:
+        * NODE_OPTIONS: --max_old_space_size=2560
+    * This helps prevent Javascript stack overloads
+
 
 
 ## Sprints
