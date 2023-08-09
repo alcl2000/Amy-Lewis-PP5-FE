@@ -58,9 +58,6 @@ const ProfileDetail = (props) => {
             </h2>
         {profileData?.bio ? <p>{profileData.bio}</p> : <p>Here's what I'm working on:</p>}
         </Container>
-        <Container>
-            Projects
-        </Container>
     </div>
   )
 }
