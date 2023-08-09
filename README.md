@@ -197,9 +197,34 @@ Task detail view
 - The log in page allows users to input valid log in data to login and access their account 
 - Similar to the sign up page, if the data is incorrect and the server returns a 400 error, the user will recieve an error and be asked to resubmit
 
+### Home page
+
+![]('../../read_me_assets/home-page-logged-out.png')
+![]('../../read_me_assets/home-page-logged-in.png)
+- The home page displays different content dependant on whether the user is logged in or not, either displaying either the link to sign up or the users projects
+
+### Project View
+
+![]('../../read_me_assets/profile-detail.jpg')
+
+- The projects are displayed in detail with the assigned tasks and other project details
+
+#### Project editing
+
+![]('../../read_me_assets/profile-detail.jpg')
+
+- The projects are able to be edited by the owners of the projects using a dropdown
+
+### Task details 
+
+![]('../../read_me_assets/task-detail.png')
+
+- Users can access the details of each task by viewing the tasks' detail page
+
 ## Features that will not be implemented 
 - While the backend feature has the ability to support adding users to projects, due to time constraints, the front end app will not have this feature
-- The profile model was built out into a full detail view, however 
+- The profile model was built out into a full detail view, however the ability to search for users has not been added due to time constraints
+
 - ![]('../../read_me_assets/profile-detail.jpg')
 
 
