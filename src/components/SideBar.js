@@ -43,7 +43,7 @@ export const SideBar = () => {
                     </Card>
                 </Link>
             </li>
-        })};
+        })}
     </ul>);
   return (
     <div className={styles.Container}>
