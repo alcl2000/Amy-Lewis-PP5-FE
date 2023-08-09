@@ -5,6 +5,16 @@
 
 The wireframes for this project can be found here: [the figma file for this project](https://www.figma.com/file/Xy7IknEYiA9DK80qsBmh1f/Task-Manager?type=design&node-id=0-1&mode=design&t=m6P73NpDVyaUjUIy-0)
 
+### Site colours
+- The colours for this site were chosen for their muted properties, as the main focus of the site is inended to be the user's interactions with their work. As such all colours were chosen to be as unintrusive as possible
+
+![Colour swatches for this project]('../../read_me_assets/color-swatch.png')
+
+### Typography
+
+- Similarly to the colour choices, font choices were made to be easy to read and unobtrusive to the user, IBM's plex sans fonnt was used to satisfy both of these conditions
+
+![]('../../read_me_assets/font-choices.png')
 
 ## Design documents:
 
